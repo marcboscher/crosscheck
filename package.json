@@ -1,0 +1,48 @@
+{
+  "name": "crosscheck",
+  "version": "0.0.1",
+  "main": "lib/crosscheck.js",
+  "description": "Sync and link your tasks",
+  "author": {
+    "name": "Marc Boscher",
+    "email": "boscher.marc@gmail.com"
+  },
+  "homepage": "http://github.com/marcboscher/crosscheck/",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/marcboscher/crosscheck.git"
+  },
+  "bugs": {
+    "url": "http://github.com/marcboscher/crosscheck/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "lib"
+  ],
+  "dependencies": {
+    "bluebird": "^2.3.5",
+    "config": "^1.6.0",
+    "js-yaml": "^3.2.2",
+    "lodash": "^2.4.1",
+    "should": "^4.0.4",
+    "stampit": "^1.1.0",
+    "superagent": "^0.20.0",
+    "superagent-bluebird-promise": "^0.3.0"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-nodeunit": "^0.3.3",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-mocha-cli": "^1.9.0",
+    "jshint-stylish": "^0.2.0",
+    "load-grunt-tasks": "^0.4.0",
+    "time-grunt": "^0.3.1"
+  },
+  "scripts": {
+    "test": "grunt"
+  },
+  "main": "./lib/crosscheck.js",
+  "bin": {
+    "crosscheck": "cli.js"
+  }
+}
