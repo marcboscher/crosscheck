@@ -5,10 +5,9 @@
 var crosscheck = require('./lib/crosscheck.js');
 
 var userArgs = process.argv;
-var searchParam = userArgs[2];
 
-if (userArgs.indexOf('-h') !== -1 || userArgs.indexOf('--help') !== -1 || searchParam === undefined) {
-    return console.log('cli help');
+if (userArgs.indexOf('-h') !== -1 || userArgs.indexOf('--help') !== -1) {
+    return console.log('Refer to https://github.com/marcboscher/crosscheck for help');
 }
 
 if (userArgs.indexOf('-v') !== -1 || userArgs.indexOf('--version') !== -1) {

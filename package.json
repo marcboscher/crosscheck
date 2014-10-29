@@ -17,6 +17,7 @@
   },
   "license": "MIT",
   "files": [
+    "cli.js",
     "lib"
   ],
   "dependencies": {
@@ -43,6 +44,6 @@
   },
   "main": "./lib/crosscheck.js",
   "bin": {
-    "crosscheck": "cli.js"
+    "crosscheck": "./cli.js"
   }
 }
