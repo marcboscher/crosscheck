@@ -1,6 +1,33 @@
 
 > Manage Github issues from Asana
 
+*This project is still at an early stage and should considered experimental.*
+
+CrossCheck lets you use [Asana](http://asana.com) as a frontend to manage work 
+in other end systems. Currently only GitHub is supported, with some big limitations 
+(see below). Find out more by reading [**The Big Picture**]
+(https://github.com/marcboscher/crosscheck/wiki/The-Big-Picture).
+
+### Here some things you can already do:
+
+- View and edit GitHub issues from Asana, while remaining completely transparent
+  to GitHub users.
+- Manage issues in multiple GitHub repositories from a single Asana view.
+- Add existing Asana task to a GitHub repo simply by assigning a new projects in Asana.
+- Manage GitHub issues and non-GitHub tasks in the same view by assigning multiple Asana projects.
+- Order github issues in Asana to prioritize them.
+- Quickly add a bunch of issues using Asana's superfast UI.
+- Easily add links to other Asana tasks using Asana's link auto-complete.
+
+### Limitations & Roadmap
+
+- Synchronized Comments (coming soon!!!)
+- Map GitHub labels to Asana tags
+- Map GitHub milestones to Asana tags
+- Map GitHub assignees to Asana assignees (only if assigned to you)
+- Synchronized attachments
+- Support Asana sections
+- OAuth support
 
 
 ## Getting Started
@@ -20,15 +47,9 @@ crosscheck:
         # Alternative
         userName: YOUR-GITHUB-USER
         password: YOUR-GITHUB-PSW
+
 ```
 
-
-Install the module with: `npm install crosscheck`
-
-```js
-var crosscheck = require('crosscheck');
-crosscheck.sync();
-```
 
 Install with cli command
 
@@ -38,6 +59,15 @@ $ crosscheck --help
 $ crosscheck                # sync once
 $ crosscheck -t 300         # sync every 5 minutes
 ```
+
+
+Or install the module with: `npm install crosscheck`
+
+```js
+var crosscheck = require('crosscheck');
+crosscheck.sync();
+```
+
 
 
 
