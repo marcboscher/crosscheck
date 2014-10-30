@@ -7,15 +7,15 @@
 
 Setup the configuration by creating a file config/local.yml within your 
 working directory. You can also use json, properties and more.
-See (node-config)[https://github.com/lorenwest/node-config/wiki/Configuration-Files]
+See [node-config](https://github.com/lorenwest/node-config/wiki/Configuration-Files)
 
-```yml
+```yaml
 crosscheck:
     asana:
         apiKey: YOUR-ASANA-API-KEY
         
     github:
-        # Recommended see [GitHub Doc](https://help.github.com/articles/creating-an-access-token-for-command-line-use/)
+        # Recommended see https://help.github.com/articles/creating-an-access-token-for-command-line-use/
         personalAccessToken: YOUR-GITHUB-ACCESS-TOKEN
         # Alternative
         userName: YOUR-GITHUB-USER
