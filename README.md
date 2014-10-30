@@ -9,7 +9,7 @@ in other end systems. Currently only GitHub is supported, with some big limitati
 Find out more by reading [**The Big Picture**]
 (https://github.com/marcboscher/crosscheck/wiki/The-Big-Picture).
 
-#### Here some things you can already do:
+#### Things you can already do:
 
 - View and edit GitHub issues from Asana, while remaining completely transparent
   to GitHub users.
