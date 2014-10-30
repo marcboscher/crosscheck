@@ -5,27 +5,28 @@
 
 CrossCheck lets you use [Asana](http://asana.com) as a frontend to manage work 
 in other end systems. Currently only GitHub is supported, with some big limitations 
-(see below). Find out more by reading [**The Big Picture**]
+(see below).   
+Find out more by reading [**The Big Picture**]
 (https://github.com/marcboscher/crosscheck/wiki/The-Big-Picture).
 
-### Here some things you can already do:
+#### Here some things you can already do:
 
 - View and edit GitHub issues from Asana, while remaining completely transparent
   to GitHub users.
 - Manage issues in multiple GitHub repositories from a single Asana view.
-- Add existing Asana task to a GitHub repo simply by assigning a new projects in Asana.
+- Add existing Asana task to a GitHub repo simply by assigning a project in Asana.
 - Manage GitHub issues and non-GitHub tasks in the same view by assigning multiple Asana projects.
 - Order github issues in Asana to prioritize them.
 - Quickly add a bunch of issues using Asana's superfast UI.
 - Easily add links to other Asana tasks using Asana's link auto-complete.
 
-### Limitations & Roadmap
+#### Limitations & Roadmap
 
-- Synchronized Comments (coming soon!!!)
+- Synchronize Comments (coming soon!!!)
 - Map GitHub labels to Asana tags
 - Map GitHub milestones to Asana tags
 - Map GitHub assignees to Asana assignees (only if assigned to you)
-- Synchronized attachments
+- Synchronize attachments
 - Support Asana sections
 - OAuth support
 
@@ -75,7 +76,7 @@ crosscheck.sync();
 ## Documentation
 
 The API doc is not online yet, but you can generate it locally. 
-Check out the project and cd into it:
+Check out the project and `cd` into it:
 
 ```sh
 $ npm install
