@@ -6,7 +6,7 @@
 CrossCheck lets you use [Asana](http://asana.com) as a frontend to manage work 
 in other end systems. Currently only GitHub is supported, with some big limitations 
 (see below).   
-Find out more by reading [**The Big Picture**]
+Check out [**The Big Picture**]
 (https://github.com/marcboscher/crosscheck/wiki/The-Big-Picture).
 
 #### Things you can already do:
