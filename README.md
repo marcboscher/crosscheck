@@ -17,10 +17,8 @@ Install with cli command
 ```sh
 $ npm install -g crosscheck
 $ crosscheck --help
-// Run once
-$ crosscheck
-// Sync every 5 minutes
-$ crosscheck -t 300
+$ crosscheck                # sync once
+$ crosscheck -t 300         # sync every 5 minutes
 ```
 
 
