@@ -41,6 +41,16 @@ module.exports = function (grunt) {
       //all: ['test/crosscheck_test.js']
       //all: ['test/conf_test.js']
     },
+    jsdoc : {
+        dist : {
+            src: ['lib/*.js', "README.md"], 
+            options: {
+                destination: 'doc',
+                template: "node_modules/ink-docstrap/template",
+                configure: "jsdoc.conf.json"
+            }
+        }
+    },
     watch: {
       gruntfile: {
         files: '<%= jshint.gruntfile.src %>',
@@ -62,5 +72,5 @@ module.exports = function (grunt) {
   });
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'mochacli']);
+  grunt.registerTask('default', ['jshint', 'mochacli', 'jsdoc']);
 };

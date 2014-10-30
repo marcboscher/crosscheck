@@ -35,7 +35,9 @@
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-nodeunit": "^0.3.3",
     "grunt-contrib-watch": "^0.6.1",
+    "grunt-jsdoc": "^0.5.7",
     "grunt-mocha-cli": "^1.9.0",
+    "ink-docstrap": "^0.4.12",
     "jshint-stylish": "^0.2.0",
     "load-grunt-tasks": "^0.4.0",
     "time-grunt": "^0.3.1"
