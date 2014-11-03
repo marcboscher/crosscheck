@@ -9,7 +9,7 @@ in other end systems. Currently only GitHub is supported, with some big limitati
 Check out [**The Big Picture**]
 (https://github.com/marcboscher/crosscheck/wiki/The-Big-Picture).
 
-#### Things you can already do:
+#### Things you can already do
 
 - View and edit GitHub issues from Asana, while remaining completely transparent
   to GitHub users.
@@ -20,7 +20,7 @@ Check out [**The Big Picture**]
 - Quickly add a bunch of issues using Asana's superfast UI.
 - Easily add links to other Asana tasks using Asana's link auto-complete.
 
-#### Limitations & Roadmap
+#### ~~Limitations~~ Roadmap
 
 - Synchronize Comments (coming soon!!!)
 - Map GitHub labels to Asana tags
@@ -29,6 +29,12 @@ Check out [**The Big Picture**]
 - Synchronize attachments
 - Support Asana sections
 - OAuth support
+
+#### How It Works
+To sync an Asana project with a GitHub repo, prefix the project name with `#cc` and specify the `#source`, `#owner` and `#repo` in the project description. There's nothing to do on the GitHub side.
+
+![Asana project config](asana-setup.png)
+
 
 
 ## Getting Started
