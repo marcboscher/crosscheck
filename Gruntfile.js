@@ -37,6 +37,7 @@ module.exports = function (grunt) {
       },
       all: ['test/*.js']
       //all: ['test/github_test.js']
+      //all: ['test/asana_test.js']
       //all: ['test/parser_test.js']
       //all: ['test/crosscheck_test.js']
       //all: ['test/conf_test.js']

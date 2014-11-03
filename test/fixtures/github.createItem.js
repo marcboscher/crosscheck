@@ -1,0 +1,31 @@
+var nock = require('nock');
+
+nock('https://api.github.com:443')
+  .post('/repos/marcboscher/cctest/issues')
+  .reply(201, 
+  {"url":"https://api.github.com/repos/marcboscher/cctest/issues/36","labels_url":"https://api.github.com/repos/marcboscher/cctest/issues/36/labels{/name}","comments_url":"https://api.github.com/repos/marcboscher/cctest/issues/36/comments","events_url":"https://api.github.com/repos/marcboscher/cctest/issues/36/events","html_url":"https://github.com/marcboscher/cctest/issues/36","id":47649451,"number":36,"title":"create test","user":{"login":"marcboscher","id":1174558,"avatar_url":"https://avatars.githubusercontent.com/u/1174558?v=2","gravatar_id":"","url":"https://api.github.com/users/marcboscher","html_url":"https://github.com/marcboscher","followers_url":"https://api.github.com/users/marcboscher/followers","following_url":"https://api.github.com/users/marcboscher/following{/other_user}","gists_url":"https://api.github.com/users/marcboscher/gists{/gist_id}","starred_url":"https://api.github.com/users/marcboscher/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/marcboscher/subscriptions","organizations_url":"https://api.github.com/users/marcboscher/orgs","repos_url":"https://api.github.com/users/marcboscher/repos","events_url":"https://api.github.com/users/marcboscher/events{/privacy}","received_events_url":"https://api.github.com/users/marcboscher/received_events","type":"User","site_admin":false},"labels":[{"url":"https://api.github.com/repos/marcboscher/cctest/labels/invalid","name":"invalid","color":"e6e6e6"}],"state":"open","locked":false,"assignee":{"login":"marcboscher","id":1174558,"avatar_url":"https://avatars.githubusercontent.com/u/1174558?v=2","gravatar_id":"","url":"https://api.github.com/users/marcboscher","html_url":"https://github.com/marcboscher","followers_url":"https://api.github.com/users/marcboscher/followers","following_url":"https://api.github.com/users/marcboscher/following{/other_user}","gists_url":"https://api.github.com/users/marcboscher/gists{/gist_id}","starred_url":"https://api.github.com/users/marcboscher/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/marcboscher/subscriptions","organizations_url":"https://api.github.com/users/marcboscher/orgs","repos_url":"https://api.github.com/users/marcboscher/repos","events_url":"https://api.github.com/users/marcboscher/events{/privacy}","received_events_url":"https://api.github.com/users/marcboscher/received_events","type":"User","site_admin":false},"milestone":null,"comments":0,"created_at":"2014-11-03T21:51:37Z","updated_at":"2014-11-03T21:51:37Z","closed_at":null,"body":"this is a test\n\nextra line","closed_by":null}, 
+  { server: 'GitHub.com',
+  date: 'Mon, 03 Nov 2014 21:51:37 GMT',
+  'content-type': 'application/json; charset=utf-8',
+  connection: 'close',
+  status: '201 Created',
+  'x-ratelimit-limit': '5000',
+  'x-ratelimit-remaining': '4988',
+  'x-ratelimit-reset': '1415053790',
+  'cache-control': 'private, max-age=60, s-maxage=60',
+  etag: '"955be0581434c75872e5f4f3fd479ab1"',
+  'x-oauth-scopes': 'repo',
+  'x-accepted-oauth-scopes': '',
+  location: 'https://api.github.com/repos/marcboscher/cctest/issues/36',
+  vary: 'Accept, Authorization, Cookie, X-GitHub-OTP',
+  'x-github-media-type': 'github.v3; format=json',
+  'x-xss-protection': '1; mode=block',
+  'x-frame-options': 'deny',
+  'content-security-policy': 'default-src \'none\'',
+  'content-length': '2643',
+  'access-control-allow-credentials': 'true',
+  'access-control-expose-headers': 'ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+  'access-control-allow-origin': '*',
+  'x-github-request-id': '607FE41B:382B:2F03167:5457F8E9',
+  'strict-transport-security': 'max-age=31536000; includeSubdomains; preload',
+  'x-content-type-options': 'nosniff' });

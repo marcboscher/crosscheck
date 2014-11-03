@@ -1,8 +1,9 @@
-/*global describe,it*/
+/*global describe,before,after,it*/
 /*jshint expr: true*/
 "use strict";
 var item = require("../lib/item"),
   github = require("../lib/github"),
+  record = require('./record'),
   should = require("should"),
   _ = require("lodash");
 
@@ -119,6 +120,11 @@ describe("github.", function () {
   });
 
   describe("getIssues with no otions", function () {
+    
+    var recorder = record('github.getIssues_no_options');
+    before(recorder.before);
+    after(recorder.after);
+
     it("must return an array of issues whose title should be a string", function () {
       return github.getIssues().then(function (issues) {
         //console.log(issues);
@@ -130,6 +136,11 @@ describe("github.", function () {
   });
   
   describe("getIssues with owner and repo", function () {
+    
+    var recorder = record('github.getIssues_with_options');
+    before(recorder.before);
+    after(recorder.after);
+
     it("must return an array of valid issues whose title should be a string", function () {
       return github.getIssues(
           {
@@ -152,6 +163,11 @@ describe("github.", function () {
   });
   
   describe("getItems", function () {
+    
+    var recorder = record('github.getItems');
+    before(recorder.before);
+    after(recorder.after);
+
     it("must return an array of items", function () {
       return github.getItems({"owner": "marcboscher", "repo": "cctest"}).then(function (items) {
         //console.log(items);
@@ -164,6 +180,11 @@ describe("github.", function () {
   });
   
   describe("updateItem", function () {
+
+    var recorder = record('github.updateItem');
+    before(recorder.before);
+    after(recorder.after);
+
     it("must not fail", function () {
       var newItem = item.create(
         {
@@ -187,17 +208,23 @@ describe("github.", function () {
           }
         });
     
-      return github.updateItem(oldItem, newItem).then(function (data) {
+      return github.updateItem(oldItem, newItem).then(function (item) {
         //console.log(data);
+        item.title.should.be.a.String;
       });
     });
   });
   
-  describe.skip("createItem", function () {
+  describe("createItem", function () {
+
+    var recorder = record('github.createItem');
+    before(recorder.before);
+    after(recorder.after);
+
     it("must not fail", function () {
       var itemToCreate = item.create(
         {
-          "title" : "create test " + new Date(),
+          "title" : "create test",
           "body" : "this is a test\n\nextra line",
           "completed" : false,
           "fields" : {
@@ -217,11 +244,16 @@ describe("github.", function () {
     });
   });
   
-  describe.skip("createItem in completed state", function () {
+  describe("createItem in completed state", function () {
+    
+    var recorder = record('github.createItem_completed');
+    before(recorder.before);
+    after(recorder.after);
+
     it("must create a completed item", function () {
       var itemToCreate = item.create(
         {
-          "title" : "create test in complete state " + new Date(),
+          "title" : "create test in complete state",
           "completed" : true,
           "fields" : {
             "labels" : "invalid",

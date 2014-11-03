@@ -40,6 +40,7 @@
     "ink-docstrap": "^0.4.12",
     "jshint-stylish": "^0.2.0",
     "load-grunt-tasks": "^0.4.0",
+    "nock": "^0.48.2",
     "time-grunt": "^0.3.1"
   },
   "scripts": {

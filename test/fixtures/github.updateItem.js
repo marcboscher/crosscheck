@@ -1,0 +1,30 @@
+var nock = require('nock');
+
+nock('https://api.github.com:443')
+  .patch('/repos/marcboscher/cctest/issues/10')
+  .reply(200, ["1f8b0800000000000003ad944f8fda3010c5bf4ae4532bc13a86c0ee46aa7aaa7ae9f6527a69b7428e331bac3a76643b59d188efdeb1c9d205b47f602b0e488edf6f262f33af27ad5524272bef1b9753ca1b795149bf6a8b0b616a6aa1318ed6dc8ac238b1024b85f0e03c95ceb5e0284bc988285e8072cb3782e816d353cd6bd82016ebd7a0fddbc10f206442f75f885b0cf256be56072ffec8bd177c9325c9b3f934cba6976c44745b176049ced211f1d22bc0aff2bd29b98724389edc189d7c355d924e9349cab284cdf3ec3acf66c9e79bc5389da569f2ee13771eac4ebe79ae4b6ecb64216b788f6db62e907ba24c2535721f35864f431f8c5d66b3d9d5","88f08e7b6e0f3f663c74c364049a30daa39571485a3aa83f761f26c8abec00096012ca3f376281b63762a7d88a77ef8c52e61e19873def4ff25119ba13ee205257e74150d853e3713f96a14e98de4aba9746f7b8a528ea69f85bca32601cfa6ea13cb5ad41864ddd6beca78f8b1c796de184958d97469fecd89e1861c6565ccb3ffc2c188a1d3262c29cfa7a5184e2d7acf3b1cb5b554f1b2b3b2ed6c1160b0264873e9f473c9023d0af9bb8c061f1d075e961c9cb3a2cdf1d570e360fa949f29ffdf3fbf164046ff3924add71859b860982c18935ff1d08a30cee3d8179f891cdaf384f3e5c320d689428237e036e696c0a97df395969c00bba556a446aa9307a8cde1deca234c794121610562eb94760c8a4314bc713b6481986583e613fb0401b136cef0e1ba7d3c584c5f4cac21da18c1bae6ccb16a65c23f29ab1ab5bfd05432d19300966e01339387f4d0e0e950aa4874a9bbf5cc9e216fe060000"], { server: 'GitHub.com',
+  date: 'Mon, 03 Nov 2014 21:49:44 GMT',
+  'content-type': 'application/json; charset=utf-8',
+  'transfer-encoding': 'chunked',
+  connection: 'close',
+  status: '200 OK',
+  'x-ratelimit-limit': '5000',
+  'x-ratelimit-remaining': '4989',
+  'x-ratelimit-reset': '1415053790',
+  'cache-control': 'private, max-age=60, s-maxage=60',
+  etag: '"fc7df1067f4978afbdd02bc8d885c215"',
+  'x-oauth-scopes': 'repo',
+  'x-accepted-oauth-scopes': '',
+  vary: 'Accept, Authorization, Cookie, X-GitHub-OTP',
+  'x-github-media-type': 'github.v3; format=json',
+  'x-xss-protection': '1; mode=block',
+  'x-frame-options': 'deny',
+  'content-security-policy': 'default-src \'none\'',
+  'access-control-allow-credentials': 'true',
+  'access-control-expose-headers': 'ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+  'access-control-allow-origin': '*',
+  'x-github-request-id': '607FE41B:44A0:5CC3BD6:5457F878',
+  'strict-transport-security': 'max-age=31536000; includeSubdomains; preload',
+  'x-content-type-options': 'nosniff',
+  'x-served-by': '065b43cd9674091fec48a221b420fbb3',
+  'content-encoding': 'gzip' });
