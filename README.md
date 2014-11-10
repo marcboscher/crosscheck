@@ -1,5 +1,5 @@
 
-> Manage Github issues from Asana
+> Helping products managers track their products across multiple tools.
 
 *This project is still at an early stage and should considered experimental.*
 
