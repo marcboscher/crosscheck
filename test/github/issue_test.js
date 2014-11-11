@@ -1,14 +1,14 @@
 /*global describe,before,after,it*/
 /*jshint expr: true*/
 "use strict";
-var conf = require("../lib/conf"),
-  item = require("../lib/item"),
-  github = require("../lib/github"),
-  record = require('./record'),
+var conf = require("../../lib/conf"),
+  item = require("../../lib/item"),
+  issueModule = require("../../lib/github/issue"),
+  record = require('../record'),
   should = require("should"),
   _ = require("lodash");
 
-describe("github.", function () {
+describe("github.issue", function () {
   describe("toItem", function () {
     it("must map an issue to an item", function () {
       var issue = {
@@ -85,7 +85,7 @@ describe("github.", function () {
         }
       });
       
-      github.toItem(issue, {repo : "myrepo", owner : "myowner"}).should.eql(expectedItem);
+      issueModule.toItem(issue, {repo : "myrepo", owner : "myowner"}).should.eql(expectedItem);
     });
   });
   
@@ -116,18 +116,18 @@ describe("github.", function () {
         //"milestone": "m1"
       };
       
-      github.fromItem(it).should.eql(expectedIssue);
+      issueModule.fromItem(it).should.eql(expectedIssue);
     });
   });
 
   describe("getIssues with no otions", function () {
     
-    var recorder = record('github.getIssues_no_options');
+    var recorder = record('github.issue.getIssues_no_options');
     before(recorder.before);
     after(recorder.after);
 
     it("must return an array of issues whose title should be a string", function () {
-      return github.getIssues().then(function (issues) {
+      return issueModule.getIssues().then(function (issues) {
         //console.log(issues);
         issues.forEach(function (issue) {
           issue.title.should.be.a.String;
@@ -138,12 +138,12 @@ describe("github.", function () {
   
   describe("getIssues with owner and repo", function () {
     
-    var recorder = record('github.getIssues_with_options');
+    var recorder = record('github.issue.getIssues_with_options');
     before(recorder.before);
     after(recorder.after);
 
     it("must return an array of valid issues whose title should be a string", function () {
-      return github.getIssues(
+      return issueModule.getIssues(
           {
             "owner": "marcboscher", 
             "repo": "cctest", 
@@ -165,12 +165,12 @@ describe("github.", function () {
   
   describe("getItems", function () {
     
-    var recorder = record('github.getItems');
+    var recorder = record('github.issue.getItems');
     before(recorder.before);
     after(recorder.after);
 
     it("must return an array of items", function () {
-      return github.getItems({"owner": "marcboscher", "repo": "cctest"}).then(function (items) {
+      return issueModule.getItems({"owner": "marcboscher", "repo": "cctest"}).then(function (items) {
         //console.log(items);
         items.forEach(function (items) {
           items.title.should.be.a.String;
@@ -182,7 +182,7 @@ describe("github.", function () {
   
   describe("updateItem", function () {
 
-    var recorder = record('github.updateItem');
+    var recorder = record('github.issue.updateItem');
     before(recorder.before);
     after(recorder.after);
 
@@ -209,7 +209,7 @@ describe("github.", function () {
           }
         });
     
-      return github.updateItem(oldItem, newItem).then(function (item) {
+      return issueModule.updateItem(oldItem, newItem).then(function (item) {
         //console.log(data);
         item.title.should.be.a.String;
       });
@@ -218,7 +218,7 @@ describe("github.", function () {
   
   describe("createItem", function () {
 
-    var recorder = record('github.createItem');
+    var recorder = record('github.issue.createItem');
     before(recorder.before);
     after(recorder.after);
 
@@ -237,7 +237,7 @@ describe("github.", function () {
           }
         });
     
-      return github.createItem(itemToCreate).then(function (itemCreated) {
+      return issueModule.createItem(itemToCreate).then(function (itemCreated) {
         itemCreated.title.should.eql("#" + itemCreated.fields.number + " " + itemToCreate.title);
         itemCreated.body.should.eql(itemToCreate.body);
         itemCreated.completed.should.eql(itemToCreate.completed);
@@ -247,7 +247,7 @@ describe("github.", function () {
   
   describe("createItem in completed state", function () {
     
-    var recorder = record('github.createItem_completed');
+    var recorder = record('github.issue.createItem_completed');
     before(recorder.before);
     after(recorder.after);
 
@@ -263,7 +263,7 @@ describe("github.", function () {
           }
         });
     
-      return github.createItem(itemToCreate).then(function (itemCreated) {
+      return issueModule.createItem(itemToCreate).then(function (itemCreated) {
         itemCreated.title.should.eql(conf.get("github.issueNumberPrefix") + itemCreated.fields.number + " " + itemToCreate.title);
         itemCreated.completed.should.eql(itemToCreate.completed);
       });
