@@ -70,6 +70,44 @@ describe("asana.", function () {
       asana.toItem(task).should.eql(expectedItem);
     });
   });
+
+
+  describe("fromItem", function () {
+    it("must map an item to a task", function () {
+      var 
+        it = item.create({
+          "title" : "#2 Reference issue",
+          "body" : "some **bold** text. some *italic* text\n\na list\n- foo\n- bar\n- a sublist\n  - a\n  - b\n  - c\n- baz\n\n",
+          //"body" : "some **bold** text\n",
+          "managerId" : "17620819608823",
+          "completed" : false,
+          "lastUpdated" : 1412966365654, 
+          "tags" : [
+            "#gh.milestone m1",
+            "#gh.label lab1",
+            "#gh.state open"
+          ],
+          "fields" : {
+            "link" : "https://github.com/marcboscher/job-template/issues/2",
+            "assignee" : "marcboscher",
+            "src" :  "gh",
+            "id" : "45417090",
+            "repo" : "job-template",
+            "owner" : "marcboscher"
+          }
+        }),
+
+      expectedTask = {
+        "data" : {
+          "name" : "#2 Reference issue",
+          "notes" : "some **bold** text. some *italic* text\n\na list\n- foo\n- bar\n- a sublist\n  - a\n  - b\n  - c\n- baz\n\n\n#link https://github.com/marcboscher/job-template/issues/2\n#assignee marcboscher\n#src gh\n#id 45417090\n#repo job-template\n#owner marcboscher",
+          "completed" : false,
+        }
+      };
+        
+      asana.fromItem(it).should.eql(expectedTask);
+    });
+  });
   
 
   describe("getProjects", function () {
