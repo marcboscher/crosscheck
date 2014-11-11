@@ -15,8 +15,10 @@ describe("parser.", function () {
       outputText.should.not.containEql("\r");
       outputText.should.be.exactly(expectedText);
     });
-    
-    it("should extract fields", function () {
+  }); 
+
+  describe("extractFields", function () {
+    it("should extract any variation of fields", function () {
       var fields = {
           "extra-field": "bar"
         },
@@ -35,6 +37,24 @@ describe("parser.", function () {
       outputText = parser.extractFields(inputText, fields);
       //console.log(outputText);
       outputText.should.be.exactly(expectedText);
+    });
+  });
+ 
+  describe("serializeFields", function () {
+    it("should convert all fields to a string", function () {
+      var inputFields = {
+          "extra-field": "bar",
+          "field1": "value",
+          "field2": "",
+          "field3": "value of field 3",
+          "!": "value of single character field",
+          "final-field.at/end" : "value of field at end"
+        },
+        expectedString = "\n#extra-field bar\n#field1 value\n#field2 \n#field3 value of field 3\n#! value of single character field\n#final-field.at/end value of field at end",
+        outputString;
+      
+      outputString = parser.serializeFields(inputFields);
+      outputString.should.be.exactly(expectedString);
     });
   });
   

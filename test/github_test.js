@@ -1,7 +1,8 @@
 /*global describe,before,after,it*/
 /*jshint expr: true*/
 "use strict";
-var item = require("../lib/item"),
+var conf = require("../lib/conf"),
+  item = require("../lib/item"),
   github = require("../lib/github"),
   record = require('./record'),
   should = require("should"),
@@ -263,7 +264,7 @@ describe("github.", function () {
         });
     
       return github.createItem(itemToCreate).then(function (itemCreated) {
-        itemCreated.title.should.eql("#" + itemCreated.fields.number + " " + itemToCreate.title);
+        itemCreated.title.should.eql(conf.get("github.issueNumberPrefix") + itemCreated.fields.number + " " + itemToCreate.title);
         itemCreated.completed.should.eql(itemToCreate.completed);
       });
     });

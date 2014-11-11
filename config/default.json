@@ -1,0 +1,22 @@
+{ "crosscheck": 
+  {
+    "keywordPrefix" : "#",
+    "fieldSeparator" : " ",
+    "emptyFieldValue" : "",
+
+    "asana" : {
+      "apiKey" : null,
+      "serviceAbbr" : "as"
+    },
+    
+    "github" : {
+      "personalAccessToken" : null,
+      "userName" : null,
+      "password" : null,
+      "serviceAbbr" : "gh",
+      "excludeIssuesWithLabels" : ["invalid"],
+      "issueNumberPrefix" : "#",
+      "unassignedUser" : ""
+    }
+  }
+}
