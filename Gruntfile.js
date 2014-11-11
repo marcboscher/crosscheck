@@ -35,9 +35,11 @@ module.exports = function (grunt) {
         timeout: 10000,
         bail: true
       },
-      all: ['test/*.js']
+      all: ['test/**/*.js']
       //all: ['test/github_test.js']
-      //all: ['test/asana_test.js']
+      //all: ['test/asana/project_test.js']
+      //all: ['test/asana/*_test.js']
+      // all: ['test/asana/story_test.js']
       //all: ['test/parser_test.js']
       //all: ['test/crosscheck_test.js']
       //all: ['test/conf_test.js']

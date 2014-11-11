@@ -1,17 +1,16 @@
 /*global describe,before,after,it*/
 /*jshint expr: true*/
 "use strict";
-var item = require("../lib/item"),
-  comment = require("../lib/comment"),
-  asana = require("../lib/asana"),
-  record = require('./record'),
+var item = require("../../lib/item"),
+  comment = require("../../lib/comment"),
+  taskModule = require("../../lib/asana/task"),
+  record = require('../record'),
   _ = require("lodash"),
   should = require("should"),
-  nock = require('nock'),
-  PROJECT_PREFIX = "#cc";
+  nock = require('nock');
 
 
-describe("asana.", function () {
+describe("asana.task.", function () {
   describe("toItem", function () {
     it("must map a task to an item", function () {
       var task = {
@@ -69,7 +68,7 @@ describe("asana.", function () {
         }
       });
       
-      asana.toItem(task).should.eql(expectedItem);
+      taskModule.toItem(task).should.eql(expectedItem);
     });
   });
 
@@ -107,38 +106,19 @@ describe("asana.", function () {
         }
       };
         
-      asana.fromItem(it).should.eql(expectedTask);
+      taskModule.fromItem(it).should.eql(expectedTask);
     });
   });
   
 
-  describe("getProjects", function () {
-    
-    var recorder = record('asana.getProjects');
-    before(recorder.before);
-    after(recorder.after);
-
-    it("must return an array of projects whose names have the right prefix", function () {
-      return asana.getProjects(PROJECT_PREFIX).then(function (projects) {
-        //console.log(projects);
-        projects.forEach(function (project) {
-          project.should.have.properties("id", "name", "notes", "workspace");
-          project.workspace.should.have.properties("id");
-          project.name.should.startWith(PROJECT_PREFIX);
-        });
-      });
-    }); 
-  });
-   
-
   describe("getTasks", function () {
 
-    var recorder = record('asana.getTasks');
+    var recorder = record('asana.task.getTasks');
     before(recorder.before);
     after(recorder.after);
 
     it("must return an array of tasks whose names are strings", function () {
-      return asana.getTasks({"id": "17620819608778"}).then(function (tasks) {
+      return taskModule.getTasks({"id": "17620819608778"}).then(function (tasks) {
         //console.log(tasks);
         tasks.should.not.be.empty;
         tasks.forEach(function (task) {
@@ -152,12 +132,12 @@ describe("asana.", function () {
 
   describe("getItems", function () {
 
-    var recorder = record('asana.getItems');
+    var recorder = record('asana.task.getItems');
     before(recorder.before);
     after(recorder.after);
 
     it("must return an array of items", function () {
-      return asana.getItems({"id": "17620819608778"}).then(function (items) {
+      return taskModule.getItems({"id": "17620819608778"}).then(function (items) {
         //console.log(items);
         items.forEach(function (items) {
           items.title.should.be.a.String;
@@ -170,7 +150,7 @@ describe("asana.", function () {
 
   describe("updateItem", function () {
 
-    var recorder = record('asana.updateItem');
+    var recorder = record('asana.task.updateItem');
     before(recorder.before);
     after(recorder.after);
 
@@ -185,14 +165,14 @@ describe("asana.", function () {
           "managerId" : 18193431040338
         });
     
-      return asana.updateItem(oldItem, newItem);
+      return taskModule.updateItem(oldItem, newItem);
     });
   });
   
 
   describe("createItem", function () {
 
-    var recorder = record('asana.createItem');
+    var recorder = record('asana.task.createItem');
     before(recorder.before);
     after(recorder.after);
 
@@ -200,7 +180,7 @@ describe("asana.", function () {
       var itemToCreate = item.create(
         {
           "title" : "create test",
-          "body" : "this is a test\n\nextra line",
+          "body" : "this is a test\n\nextra line\n\n",
           "fields" : {
             "foo" : "bar",
             "baz" : "qux"
@@ -213,94 +193,10 @@ describe("asana.", function () {
           }
         };
     
-      return asana.createItem(itemToCreate, project).then(function (itemCreated) {
+      return taskModule.createItem(itemToCreate, project).then(function (itemCreated) {
         itemCreated.title.should.startWith(itemToCreate.title);
         itemCreated.body.should.eql(itemToCreate.body);
         itemCreated.completed.should.eql(itemToCreate.completed);
-      });
-    });
-  });
-
-
-  describe("toComment", function () {
-    it("must map a story to an comment", function () {
-      var story = {
-        "id" : 18704113106165,
-        "created_at" : "2014-10-26T15:18:55.240Z",
-        "created_by" : {"id" : 87450240631,"name" : "Marc Boscher"},
-        "type" : "comment",
-        "text" : "this is a comment\nover multiple lines\n\n#field1 ddd\n\n#field2"
-      },
-      expectedComment = comment.create({
-        "body" : "this is a comment\nover multiple lines\n\n",
-        "lastUpdated" : 1414336735240, 
-        "fields" : {
-          "field1" : "ddd",
-          "field2" : ""
-        }
-      });
-      
-      asana.toComment(story).should.eql(expectedComment);
-    });
-  });
-
-
-  describe("fromComment", function () {
-    it("must map a comment to a story", function () {
-      var inputComment = comment.create({
-          "body" : "this is a comment\nover multiple lines\n\n",
-          "lastUpdated" : 1414336735240, 
-          "fields" : {
-            "field1" : "ddd",
-            "field2" : ""
-          }
-        }),
-
-        expectedStory = {
-          "data" : {
-            "text" : "this is a comment\nover multiple lines\n\n\n#field1 ddd\n#field2 "
-          }
-        };
-        
-      asana.fromComment(inputComment).should.eql(expectedStory);
-    });
-  });
-
-
-  describe("getStories", function () {
-
-    var recorder = record('asana.getStories');
-    before(recorder.before);
-    after(recorder.after);
-
-    it("must return an array of stories whose texts are strings", function () {
-      return asana.getStories(18704113106162).then(function (stories) {
-        // console.log(stories);
-        stories.should.not.be.empty;
-        stories.forEach(function (story) {
-          story.should.have.properties("id", "text", "type", "created_at", "created_by");
-          story.text.should.be.a.String;
-        });
-      });
-    });
-  });
-
-  describe("getComments", function () {
-
-    var recorder = record('asana.getComments');
-    before(recorder.before);
-    after(recorder.after);
-
-    it("must return an array of comments whose bodies are strings", function () {
-      return asana.getComments(item.create({managerId : 18704113106162})).then(function (comments) {
-        // console.log(comments);
-        comments.should.not.be.empty;
-        comments.forEach(function (comment) {
-          comment.should.have.properties("body", "lastUpdated", "fields");
-          comment.body.should.be.a.String;
-          comment.body.should.not.containEql("added to ");
-          comment.body.should.not.containEql("changed the ");
-        });
       });
     });
   });
