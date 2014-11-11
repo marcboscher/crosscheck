@@ -1,6 +1,6 @@
 {
   "name": "crosscheck",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "./lib/crosscheck.js",
   "description": "Sync and link your tasks",
   "author": {
