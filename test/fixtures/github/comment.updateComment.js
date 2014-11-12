@@ -1,0 +1,30 @@
+var nock = require('nock');
+
+nock('https://api.github.com:443')
+  .patch('/repos/marcboscher/cctest/issues/comments/62577747')
+  .reply(200, ["1f8b08000000000000039d945f6bdb3014c5bf8a505f5a482acb7fe260187b2a7de9f6b28cc1280445521d812d194976c94cbefbae54af24d95670b0c170b9e7778f8faf3ce2de36b8c27bef3b5711c23a755f2bbfef77f7dcb4c4cace38d232cb77c6f1bdb484732f9d27cab95e3a023dadd4de91555a946599977801a8b6d99e534f88ff6765eb9b489d98cb1364ac5f30673acdd6604d095cfdc12e70efa4c5d5881b532b0d199c589b7a292df3a2582f301b9867f6d2412cba29af40e3467b882346d79349fd79f89401afb6132498c050f830f8403b0b7e4eb0d0fb629ac6bc02e3d2f3f9f7fd6b0c7917be4394aeaf83807024c6c3d66cc39c63084139","3fdb52148d243cb64a048c83dcad14736d4d3230f5aac1cf18d73bf2fa9de356755e193ddbde991860c6d64cab5fec2a18881d30e2b99bfb7a5104623984233957fda61a4967d5c0f821c46225976a809caf235ec801e80f9d84e5ff1e0e1ea4aebcdc32d186c3f7c21a278f0bccad641e26320f7d6942f325a5706fe8aa2a8a8a263f41d777e21f3de9264d2a684bd6a16767c4214c7a6b45d33f058532a2ab64f5ac9f98f3684221a3d10f29d05733209aa23017511807b4123d7ed92c932249d0ed0348a4d5e89b675a302bd046b5f2ee5987eb8639584e94a65996e7f8f81bca7f4ec758050000"], { server: 'GitHub.com',
+  date: 'Wed, 12 Nov 2014 20:16:08 GMT',
+  'content-type': 'application/json; charset=utf-8',
+  'transfer-encoding': 'chunked',
+  connection: 'close',
+  status: '200 OK',
+  'x-ratelimit-limit': '5000',
+  'x-ratelimit-remaining': '4999',
+  'x-ratelimit-reset': '1415826968',
+  'cache-control': 'private, max-age=60, s-maxage=60',
+  etag: '"8c59a86d6a19e3dbdc41d96f40dcdb86"',
+  'x-oauth-scopes': 'repo',
+  'x-accepted-oauth-scopes': '',
+  vary: 'Accept, Authorization, Cookie, X-GitHub-OTP',
+  'x-github-media-type': 'github.v3; format=json',
+  'x-xss-protection': '1; mode=block',
+  'x-frame-options': 'deny',
+  'content-security-policy': 'default-src \'none\'',
+  'access-control-allow-credentials': 'true',
+  'access-control-expose-headers': 'ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+  'access-control-allow-origin': '*',
+  'x-github-request-id': 'ADE76802:67D1:FEFC7A7:5463C008',
+  'strict-transport-security': 'max-age=31536000; includeSubdomains; preload',
+  'x-content-type-options': 'nosniff',
+  'x-served-by': 'a241e1a8264a6ace03db946c85b92db3',
+  'content-encoding': 'gzip' });
