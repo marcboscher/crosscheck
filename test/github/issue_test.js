@@ -122,7 +122,7 @@ describe("github.issue", function () {
 
   describe("getIssues with no otions", function () {
     
-    var recorder = record('github.issue.getIssues_no_options');
+    var recorder = record('github/issue.getIssues_no_options');
     before(recorder.before);
     after(recorder.after);
 
@@ -138,7 +138,7 @@ describe("github.issue", function () {
   
   describe("getIssues with owner and repo", function () {
     
-    var recorder = record('github.issue.getIssues_with_options');
+    var recorder = record('github/issue.getIssues_with_options');
     before(recorder.before);
     after(recorder.after);
 
@@ -165,7 +165,7 @@ describe("github.issue", function () {
   
   describe("getItems", function () {
     
-    var recorder = record('github.issue.getItems');
+    var recorder = record('github/issue.getItems');
     before(recorder.before);
     after(recorder.after);
 
@@ -182,7 +182,7 @@ describe("github.issue", function () {
   
   describe("updateItem", function () {
 
-    var recorder = record('github.issue.updateItem');
+    var recorder = record('github/issue.updateItem');
     before(recorder.before);
     after(recorder.after);
 
@@ -218,7 +218,7 @@ describe("github.issue", function () {
   
   describe("createItem", function () {
 
-    var recorder = record('github.issue.createItem');
+    var recorder = record('github/issue.createItem');
     before(recorder.before);
     after(recorder.after);
 
@@ -247,7 +247,7 @@ describe("github.issue", function () {
   
   describe("createItem in completed state", function () {
     
-    var recorder = record('github.issue.createItem_completed');
+    var recorder = record('github/issue.createItem_completed');
     before(recorder.before);
     after(recorder.after);
 

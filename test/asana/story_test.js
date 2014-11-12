@@ -59,7 +59,7 @@ describe("asana.story.", function () {
 
   describe("getStories", function () {
 
-    var recorder = record('asana.story.getStories');
+    var recorder = record('asana/story.getStories');
     before(recorder.before);
     after(recorder.after);
 
@@ -77,7 +77,7 @@ describe("asana.story.", function () {
 
   describe("getComments", function () {
 
-    var recorder = record('asana.story.getComments');
+    var recorder = record('asana/story.getComments');
     before(recorder.before);
     after(recorder.after);
 

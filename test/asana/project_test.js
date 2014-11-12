@@ -14,7 +14,7 @@ describe("asana.project.", function () {
 
   describe("getProjects", function () {
     
-    var recorder = record('asana.project.getProjects');
+    var recorder = record('asana/project.getProjects');
     before(recorder.before);
     after(recorder.after);
 

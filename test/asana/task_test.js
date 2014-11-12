@@ -113,7 +113,7 @@ describe("asana.task.", function () {
 
   describe("getTasks", function () {
 
-    var recorder = record('asana.task.getTasks');
+    var recorder = record('asana/task.getTasks');
     before(recorder.before);
     after(recorder.after);
 
@@ -132,7 +132,7 @@ describe("asana.task.", function () {
 
   describe("getItems", function () {
 
-    var recorder = record('asana.task.getItems');
+    var recorder = record('asana/task.getItems');
     before(recorder.before);
     after(recorder.after);
 
@@ -150,7 +150,7 @@ describe("asana.task.", function () {
 
   describe("updateItem", function () {
 
-    var recorder = record('asana.task.updateItem');
+    var recorder = record('asana/task.updateItem');
     before(recorder.before);
     after(recorder.after);
 
@@ -172,7 +172,7 @@ describe("asana.task.", function () {
 
   describe("createItem", function () {
 
-    var recorder = record('asana.task.createItem');
+    var recorder = record('asana/task.createItem');
     before(recorder.before);
     after(recorder.after);
 
