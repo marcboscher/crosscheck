@@ -176,7 +176,7 @@ describe("asana.task.", function () {
     before(recorder.before);
     after(recorder.after);
 
-    it("must not fail", function () {
+    it("must create the item requested", function () {
       var itemToCreate = item.create(
         {
           "title" : "create test",

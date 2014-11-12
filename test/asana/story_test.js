@@ -95,4 +95,36 @@ describe("asana.story.", function () {
     });
   });
 
+
+  describe("createComment", function () {
+
+    var recorder = record('asana/story.createComment');
+    before(recorder.before);
+    after(recorder.after);
+
+    it("must create the comment requested", function () {
+      var commentToCreate = comment.create(
+          {
+            "body" : "this is a test\n\nextra line",
+            "fields" : {
+              "foo" : "bar",
+              "baz" : "qux"
+            }
+          }),
+        itemToCommentOn = item.create({managerId : 18704113106162}),
+        expectedComment = comment.create(
+          {
+            "body" : "this is a test\n\nextra line\n\n#",
+
+          });
+    
+      return storyModule.createComment(commentToCreate, itemToCommentOn)
+        .then(function (commentCreated) {
+          commentCreated.body.should.eql(commentToCreate.body + "\n\n");
+          commentCreated.fields.should.eql(commentToCreate.fields);
+        }
+      );
+    });
+  });
+
 });
