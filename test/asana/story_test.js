@@ -19,10 +19,10 @@ describe("asana.story.", function () {
         "created_at" : "2014-10-26T15:18:55.240Z",
         "created_by" : {"id" : 87450240631,"name" : "Marc Boscher"},
         "type" : "comment",
-        "text" : "this is a comment\nover multiple lines\n\n#field1 ddd\n\n#field2"
+        "text" : "this is a comment\nover multiple lines\n\n#field1 ddd\n#field2"
       },
       expectedComment = comment.create({
-        "body" : "this is a comment\nover multiple lines\n\n",
+        "body" : "this is a comment\nover multiple lines\n",
         "lastUpdated" : 1414336735240, 
         "fields" : {
           "field1" : "ddd",
@@ -111,12 +111,7 @@ describe("asana.story.", function () {
               "baz" : "qux"
             }
           }),
-        itemToCommentOn = item.create({managerId : 18704113106162}),
-        expectedComment = comment.create(
-          {
-            "body" : "this is a test\n\nextra line\n\n#",
-
-          });
+        itemToCommentOn = item.create({managerId : 18704113106162});
     
       return storyModule.createComment(commentToCreate, itemToCommentOn)
         .then(function (commentCreated) {
