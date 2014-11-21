@@ -1,5 +1,5 @@
 
-> Helping products managers track their products across multiple tools.
+> Use the best tool for the job, don't sacrifice collaboration!
 
 *This project is still at an early stage and should considered experimental.*
 
