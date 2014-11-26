@@ -36,6 +36,7 @@ module.exports = function (grunt) {
         bail: true
       },
       all: ['test/**/*.js']
+      //all: ['test/sync_test.js']
       //all: ['test/github_test.js']
       //all: ['test/asana/project_test.js']
       //all: ['test/asana/*_test.js']
