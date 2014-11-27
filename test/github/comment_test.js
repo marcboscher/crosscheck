@@ -1,0 +1,212 @@
+/*global describe,before,after,it*/
+/*jshint expr: true*/
+"use strict";
+
+var item = require("../../lib/item"),
+  comment = require("../../lib/comment"),
+  commentModule = require("../../lib/github/comment"),
+  record = require('../record'),
+  _ = require("lodash"),
+  should = require("should"),
+  nock = require('nock');
+
+
+describe("github.comment.", function () {
+
+  describe("toComment", function () {
+    it("must map a github comment to an comment", function () {
+      var gitHubComment = {
+        "url": "https://api.github.com/repos/marcboscher/cctest/issues/comments/62769730",
+        "html_url": "https://github.com/marcboscher/cctest/issues/38#issuecomment-62769730",
+        "issue_url": "https://api.github.com/repos/marcboscher/cctest/issues/38",
+        "id": 62769730,
+        "user": {
+          "login": "marcboscher",
+          "id": 1174558
+        },
+        "created_at": "2014-11-12T18:48:02Z",
+        "updated_at": "2014-11-12T18:48:02Z",
+        "body": "a comment\r\n\r\nover multiple lines\r\n\r\n#field1 aaa\r\n#field2"
+      },
+      expectedComment = comment.create({
+        "body" : "a comment\n\nover multiple lines\n",
+        "lastUpdated" : 1415818082000, 
+        "fields" : {
+          "field1" : "aaa",
+          "field2" : "",
+          "gh_id" : "62769730"
+        }
+      });
+      
+      commentModule.toComment(gitHubComment).should.eql(expectedComment);
+    });
+  });
+
+
+  describe("fromComment", function () {
+    it("must map a comment to a GitHub comment", function () {
+      var inputComment = comment.create({
+          "body" : "this is a comment\nover multiple lines\n\n",
+          "lastUpdated" : 1414336735240, 
+          "fields" : {
+            "field1" : "ddd",
+            "field2" : "",
+            "as_id" : "223344"
+          }
+        }),
+
+        expectedComment = {
+          "body" : "this is a comment\nover multiple lines\n\n\n#as_id 223344"
+        };
+        
+      commentModule.fromComment(inputComment).should.eql(expectedComment);
+    });
+  });
+
+
+  describe("getGitHubComments", function () {
+
+    var recorder = record('github/comment.getGitHubComments');
+    before(recorder.before);
+    after(recorder.after);
+
+    it("must return an array of comments whose texts are strings", function () {
+      return commentModule.getGitHubComments(38, "marcboscher", "cctest")
+        .then(function (comments) {
+          // console.log(comments);
+          comments.should.not.be.empty;
+          comments.forEach(function (gitHubComment) {
+            gitHubComment.should.have.properties("id", "body", "user", "created_at", "updated_at");
+            gitHubComment.body.should.be.a.String;
+          });
+        });
+    });
+  });
+
+  describe("getComments", function () {
+
+    var recorder = record('github/comment.getComments');
+    before(recorder.before);
+    after(recorder.after);
+
+    it("must return an array of comments whose bodies are strings", function () {
+      return commentModule.getComments(item.create(
+          {
+            fields : {
+              number : 38,
+              owner : "marcboscher",
+              repo : "cctest"
+            }
+          }
+        ))
+        .then(function (comments) {
+          // console.log(comments);
+          comments.should.not.be.empty;
+          comments.forEach(function (comment) {
+            comment.should.have.properties("body", "lastUpdated", "fields");
+            comment.body.should.be.a.String;
+          });
+      });
+    });
+  });
+
+
+  describe("createComment", function () {
+
+    var recorder = record('github/comment.createComment');
+    before(recorder.before);
+    after(recorder.after);
+
+    it("must create the comment requested", function () {
+      var commentToCreate = comment.create(
+          {
+            "body" : "this is a test\n\nextra line",
+            "fields" : {
+              "foo" : "bar",
+              "baz" : "qux"
+            }
+          }),
+        itemToCommentOn = item.create(
+          {
+            fields : {
+              number : 38,
+              owner : "marcboscher",
+              repo : "cctest"
+            }
+          }
+        );
+    
+      return commentModule.createComment(commentToCreate, itemToCommentOn)
+        .then(function (commentCreated) {
+          commentCreated.body.should.eql(commentToCreate.body + "\n\n");
+          commentCreated.fields.foo.should.eql(commentToCreate.fields.foo);
+          commentCreated.fields.baz.should.eql(commentToCreate.fields.baz);
+          commentCreated.fields.should.have.properties("gh_id");
+        }
+      );
+    });
+  });
+
+
+  describe("updateComment", function () {
+
+    var recorder = record('github/comment.updateComment');
+    before(recorder.before);
+    after(recorder.after);
+
+    it("must not fail", function () {
+      var newComment = comment.create({
+          body : "Updated comment body " + _.random(9999) + 
+            "\nLast updated on " + new Date(),
+          fields : {
+            as_id : "223344"
+          }
+        }),
+        oldComment = comment.create({
+          fields : {
+            gh_id : "62577747"
+          }
+        }),
+
+        parentItem = item.create(
+          {
+            "fields" : {
+              "owner" : "marcboscher",
+              "repo" : "cctest"
+            }
+          });
+    
+      return commentModule.updateComment(oldComment, newComment, parentItem).then(function (updatedComment) {
+        //console.log(updatedComment);
+        updatedComment.body.should.be.a.String;
+      });
+    });
+  });
+
+
+  describe("deleteComment", function () {
+
+    var recorder = record('github/comment.deleteComment');
+    before(recorder.before);
+    after(recorder.after);
+
+    it("must not fail", function () {
+      var commentToDelete = comment.create({
+          fields : {
+            gh_id : "62776366"
+          }
+        }),
+
+        parentItem = item.create(
+          {
+            "fields" : {
+              "owner" : "marcboscher",
+              "repo" : "cctest"
+            }
+          });
+    
+      return commentModule.deleteComment(commentToDelete, parentItem);
+    });
+  });
+
+});

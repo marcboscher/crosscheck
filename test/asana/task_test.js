@@ -1,16 +1,17 @@
 /*global describe,before,after,it*/
 /*jshint expr: true*/
 "use strict";
-var item = require("../lib/item"),
-  asana = require("../lib/asana"),
-  record = require('./record'),
+var item = require("../../lib/item"),
+  comment = require("../../lib/comment"),
+  taskModule = require("../../lib/asana/task"),
+  record = require('../record'),
   _ = require("lodash"),
   should = require("should"),
-  nock = require('nock'),
-  PROJECT_PREFIX = "#cc";
+  nock = require('nock');
 
-describe("asana.", function () {
-  describe.skip("toItem", function () {
+
+describe("asana.task.", function () {
+  describe("toItem", function () {
     it("must map a task to an item", function () {
       var task = {
         "id" : 17620819608823,
@@ -67,7 +68,7 @@ describe("asana.", function () {
         }
       });
       
-      asana.toItem(task).should.eql(expectedItem);
+      taskModule.toItem(task).should.eql(expectedItem);
     });
   });
 
@@ -105,39 +106,21 @@ describe("asana.", function () {
         }
       };
         
-      asana.fromItem(it).should.eql(expectedTask);
+      taskModule.fromItem(it).should.eql(expectedTask);
     });
   });
   
 
-  describe("getProjects", function () {
-    
-    var recorder = record('asana.getProjects');
-    before(recorder.before);
-    after(recorder.after);
-
-    it("must return an array of projects whose names have the right prefix", function () {
-      return asana.getProjects(PROJECT_PREFIX).then(function (projects) {
-        //console.log(projects);
-        projects.forEach(function (project) {
-          project.should.have.properties("id", "name", "notes", "workspace");
-          project.workspace.should.have.properties("id");
-          project.name.should.startWith(PROJECT_PREFIX);
-        });
-      });
-    }); 
-  });
-   
-
   describe("getTasks", function () {
 
-    var recorder = record('asana.getTasks');
+    var recorder = record('asana/task.getTasks');
     before(recorder.before);
     after(recorder.after);
 
     it("must return an array of tasks whose names are strings", function () {
-      return asana.getTasks({"id": "17620819608778"}).then(function (tasks) {
+      return taskModule.getTasks({"id": "17620819608778"}).then(function (tasks) {
         //console.log(tasks);
+        tasks.should.not.be.empty;
         tasks.forEach(function (task) {
           task.should.have.properties("id", "name", "notes", "modified_at", "completed", "assignee", "tags", "projects");
           task.name.should.be.a.String;
@@ -149,12 +132,12 @@ describe("asana.", function () {
 
   describe("getItems", function () {
 
-    var recorder = record('asana.getItems');
+    var recorder = record('asana/task.getItems');
     before(recorder.before);
     after(recorder.after);
 
     it("must return an array of items", function () {
-      return asana.getItems({"id": "17620819608778"}).then(function (items) {
+      return taskModule.getItems({"id": "17620819608778"}).then(function (items) {
         //console.log(items);
         items.forEach(function (items) {
           items.title.should.be.a.String;
@@ -167,7 +150,7 @@ describe("asana.", function () {
 
   describe("updateItem", function () {
 
-    var recorder = record('asana.updateItem');
+    var recorder = record('asana/task.updateItem');
     before(recorder.before);
     after(recorder.after);
 
@@ -182,22 +165,22 @@ describe("asana.", function () {
           "managerId" : 18193431040338
         });
     
-      return asana.updateItem(oldItem, newItem);
+      return taskModule.updateItem(oldItem, newItem);
     });
   });
   
 
   describe("createItem", function () {
 
-    var recorder = record('asana.createItem');
+    var recorder = record('asana/task.createItem');
     before(recorder.before);
     after(recorder.after);
 
-    it("must not fail", function () {
+    it("must create the item requested", function () {
       var itemToCreate = item.create(
         {
           "title" : "create test",
-          "body" : "this is a test\n\nextra line",
+          "body" : "this is a test\n\nextra line\n\n",
           "fields" : {
             "foo" : "bar",
             "baz" : "qux"
@@ -210,11 +193,12 @@ describe("asana.", function () {
           }
         };
     
-      return asana.createItem(itemToCreate, project).then(function (itemCreated) {
+      return taskModule.createItem(itemToCreate, project).then(function (itemCreated) {
         itemCreated.title.should.startWith(itemToCreate.title);
         itemCreated.body.should.eql(itemToCreate.body);
         itemCreated.completed.should.eql(itemToCreate.completed);
       });
     });
   });
+
 });

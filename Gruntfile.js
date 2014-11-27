@@ -35,16 +35,19 @@ module.exports = function (grunt) {
         timeout: 10000,
         bail: true
       },
-      all: ['test/*.js']
+      all: ['test/**/*.js']
+      //all: ['test/sync_test.js']
       //all: ['test/github_test.js']
-      //all: ['test/asana_test.js']
+      //all: ['test/asana/project_test.js']
+      //all: ['test/asana/*_test.js']
+      // all: ['test/asana/story_test.js']
       //all: ['test/parser_test.js']
       //all: ['test/crosscheck_test.js']
       //all: ['test/conf_test.js']
     },
     jsdoc : {
         dist : {
-            src: ['lib/*.js', "README.md"], 
+            src: ['lib/**/*.js', "README.md"], 
             options: {
                 destination: 'doc',
                 template: "node_modules/ink-docstrap/template",
