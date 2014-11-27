@@ -3,6 +3,7 @@
     "keywordPrefix" : "#",
     "fieldSeparator" : " ",
     "emptyFieldValue" : "",
+    "serviceAbbr" : "cc",
 
     "asana" : {
       "apiKey" : null,
