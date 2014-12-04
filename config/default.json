@@ -7,12 +7,12 @@
     "emptyFieldValue" : "",
 
     "asana" : {
-      "keyword" : "aa",
+      "keyword" : "aa", // WARNING: not fully supported. DO NOT CHANGE
       "apiKey" : null
     },
     
     "github" : {
-      "keyword" : "gh",
+      "keyword" : "gh", // WARNING: not fully supported. DO NOT CHANGE
       "personalAccessToken" : null,
       "userName" : null,
       "password" : null,
