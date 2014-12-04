@@ -1,6 +1,7 @@
 /*global describe,it*/
 'use strict';
 var sync = require("../../lib/sync/comment"),
+  opsModule = require("../../lib/sync/ops"),
   item = require("../../lib/item"),
   comment = require("../../lib/comment"),
   cache = require("../../lib/cache"),
@@ -16,18 +17,14 @@ describe("sync/comment", function () {
           })
         ],
         gitHubComments = [],
-        expectedOperations = {
-          asana : {
-            create : [],
-            update : [],
-            del : []
-          },
+        expectedOperations = opsModule.create({
           github : {
+            parent : null,
             create : [asanaComments[0]],
             update : [],
             del : []
           } 
-        };
+        });
        
       sync.diff(asanaComments, gitHubComments).should.eql(expectedOperations);
     });
@@ -41,18 +38,14 @@ describe("sync/comment", function () {
             fields : {"gh.id" : "1"}
           })
         ],
-        expectedOperations = {
+        expectedOperations = opsModule.create({
           asana : {
+            parent : null,
             create : [gitHubComments[0]],
             update : [],
             del : []
-          },
-          github : {
-            create : [],
-            update : [],
-            del : []
-          } 
-        };
+          }
+        });
 
       sync.diff(asanaComments, gitHubComments).should.eql(expectedOperations);
     });
@@ -72,18 +65,7 @@ describe("sync/comment", function () {
             fields : {"aa.id" : "1", baz : "quz"}
           })
         ],
-        expectedOperations = {
-          asana : {
-            create : [],
-            update : [],
-            del : []
-          },
-          github : {
-            create : [],
-            update : [],
-            del : []
-          } 
-        };
+        expectedOperations = opsModule.create();
 
       sync.diff(asanaComments, gitHubComments).should.eql(expectedOperations);
     });
@@ -104,8 +86,9 @@ describe("sync/comment", function () {
             fields : {"aa.id" : "1"}
           })
         ],
-        expectedOperations = {
+        expectedOperations = opsModule.create({
           asana : {
+            parent : null,
             create : [],
             update : [
               {
@@ -114,13 +97,8 @@ describe("sync/comment", function () {
               }
             ],
             del : []
-          },
-          github : {
-            create : [],
-            update : [],
-            del : []
-          } 
-        };
+          }
+        });
 
       sync.diff(asanaComments, gitHubComments).should.eql(expectedOperations);
     });
@@ -141,13 +119,9 @@ describe("sync/comment", function () {
             fields : {"aa.id" : "1"}
           })
         ],
-        expectedOperations = {
-          asana : {
-            create : [],
-            update : [],
-            del : []
-          },
+        expectedOperations = opsModule.create({
           github : {
+            parent : null,
             create : [],
             update : [
               {
@@ -157,7 +131,7 @@ describe("sync/comment", function () {
             ],
             del : []
           } 
-        };
+        });
 
       sync.diff(asanaComments, gitHubComments).should.eql(expectedOperations);
     });
@@ -177,8 +151,9 @@ describe("sync/comment", function () {
             fields : {"gh.id" : "1"}
           })
         ],
-        expectedOperations = {
+        expectedOperations = opsModule.create({
           asana : {
+            parent : null,
             create : [],
             update : [
               {
@@ -187,13 +162,8 @@ describe("sync/comment", function () {
               }
             ],
             del : []
-          },
-          github : {
-            create : [],
-            update : [],
-            del : []
-          } 
-        };
+          }
+        });
 
       sync.diff(asanaComments, gitHubComments).should.eql(expectedOperations);
     });
@@ -214,13 +184,9 @@ describe("sync/comment", function () {
             fields : {"gh.id" : "1"}
           })
         ],
-        expectedOperations = {
-          asana : {
-            create : [],
-            update : [],
-            del : []
-          },
+        expectedOperations = opsModule.create({
           github : {
+            parent : null,
             create : [],
             update : [
               {
@@ -230,7 +196,7 @@ describe("sync/comment", function () {
             ],
             del : []
           } 
-        };
+        });
 
       sync.diff(asanaComments, gitHubComments).should.eql(expectedOperations);
     });
@@ -243,18 +209,14 @@ describe("sync/comment", function () {
             fields : {"aa.id" : "1"}
           })
         ],
-        expectedOperations = {
-          asana : {
-            create : [],
-            update : [],
-            del : []
-          },
+        expectedOperations = opsModule.create({
           github : {
+            parent : null,
             create : [],
             update : [],
             del : [gitHubComments[0]]
           } 
-        };
+        });
        
       sync.diff(asanaComments, gitHubComments).should.eql(expectedOperations);
     });
@@ -267,18 +229,14 @@ describe("sync/comment", function () {
           })
         ],
         gitHubComments = [],
-        expectedOperations = {
+        expectedOperations = opsModule.create({
           asana : {
+            parent : null,
             create : [],
             update : [],
             del : [asanaComments[0]]
-          },
-          github : {
-            create : [],
-            update : [],
-            del : []
-          } 
-        };
+          }
+        });
        
       sync.diff(asanaComments, gitHubComments).should.eql(expectedOperations);
     }); 
