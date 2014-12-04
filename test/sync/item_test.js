@@ -13,7 +13,7 @@ describe("sync/item", function () {
           item.create({
             title : "ignore because no matching github number",
             managerId : "1000",
-            fields : {number : 1}
+            fields : {"gh.number" : 1}
           })
         ],
         gitHubItems = [],
@@ -86,7 +86,7 @@ describe("sync/item", function () {
             managerId : "1000",
             body : "identical",
             lastUpdated : 111,
-            fields : {number : 2}
+            fields : {"gh.number" : 2}
           })
         ],
         gitHubItems = [
@@ -94,7 +94,7 @@ describe("sync/item", function () {
             title : "update in asana",
             body : "identical",
             lastUpdated : 222,
-            fields : {number : 2}
+            fields : {"gh.number" : 2}
           })
         ],
         expectedOperations = {
@@ -121,7 +121,7 @@ describe("sync/item", function () {
             managerId : "1000",
             body : "asana",
             lastUpdated : 111,
-            fields : {number : 2}
+            fields : {"gh.number" : 2}
           })
         ],
         gitHubItems = [
@@ -129,7 +129,7 @@ describe("sync/item", function () {
             title : "update in asana",
             body : "github",
             lastUpdated : 222,
-            fields : {number : 2}
+            fields : {"gh.number" : 2}
           })
         ],
         expectedOperations = {
@@ -161,7 +161,7 @@ describe("sync/item", function () {
             managerId : "1000",
             body : "asana",
             lastUpdated : 222,
-            fields : {number : 2}
+            fields : {"gh.number" : 2}
           })
         ],
         gitHubItems = [
@@ -169,7 +169,7 @@ describe("sync/item", function () {
             title : "update in github",
             body : "github",
             lastUpdated : 111,
-            fields : {number : 2}
+            fields : {"gh.number" : 2}
           })
         ],
         expectedOperations = {
@@ -201,7 +201,7 @@ describe("sync/item", function () {
             managerId : "1000",
             body : "identical",
             lastUpdated : 222,
-            fields : {number : 2}
+            fields : {"gh.number" : 2}
           })
         ],
         gitHubItems = [
@@ -209,7 +209,7 @@ describe("sync/item", function () {
             title : "New comments",
             body : "identical",
             lastUpdated : 111,
-            fields : {number : 2}
+            fields : {"gh.number" : 2}
           })
         ],
         expectedOperations = {
@@ -240,7 +240,7 @@ describe("sync/item", function () {
             managerId : "1000",
             body : "identical",
             lastUpdated : 333,
-            fields : {number : 2}
+            fields : {"gh.number" : 2}
           })
         ],
         gitHubItems = [
@@ -248,7 +248,7 @@ describe("sync/item", function () {
             title : "New comments",
             body : "identical",
             lastUpdated : 222,
-            fields : {number : 2}
+            fields : {"gh.number" : 2}
           })
         ],
         expectedOperations = {
@@ -280,7 +280,7 @@ describe("sync/item", function () {
             managerId : "1000",
             body : "identical",
             lastUpdated : 333,
-            fields : {number : 2}
+            fields : {"gh.number" : 2}
           })
         ],
         gitHubItems = [
@@ -288,7 +288,7 @@ describe("sync/item", function () {
             title : "New comments",
             body : "identical",
             lastUpdated : 111,
-            fields : {number : 2}
+            fields : {"gh.number" : 2}
           })
         ],
         expectedOperations = {

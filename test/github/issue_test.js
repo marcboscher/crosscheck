@@ -73,19 +73,18 @@ describe("github.issue", function () {
           // "#gh.label question"
         // ],
         "fields" : {
-          "url" : "https://github.com/marcboscher/cctest/issues/1",
-          "assignee" : "marcboscher",
-          "source" :  "gh",
-          "number" : "1",
-          "repo" : "myrepo",
-          "owner" : "myowner",
+          "gh.url" : "https://github.com/marcboscher/cctest/issues/1",
+          "gh.assignee" : "marcboscher",
+          "gh.number" : "1",
+          "gh.repo" : "myrepo",
+          "gh.owner" : "myowner",
           // TODO remove when support tags
-          "milestone" : "m1",
-          "labels" : "enhancement, question"
+          "gh.milestone" : "m1",
+          "gh.labels" : "enhancement, question"
         }
       });
       
-      issueModule.toItem(issue, {repo : "myrepo", owner : "myowner"}).should.eql(expectedItem);
+      issueModule.toItem(issue, {"gh.repo" : "myrepo", "gh.owner" : "myowner"}).should.eql(expectedItem);
     });
   });
   
@@ -96,14 +95,13 @@ describe("github.issue", function () {
         "body" : "some **bold** text. some *italic* text\n\na list\n- foo\n- bar\n- a sublist\n  - a\n  - b\n  - c\n- baz",
         "completed" : false,
         "fields" : {
-          "url" : "https://github.com/marcboscher/cctest/issues/1",
-          "assignee" : "marcboscher",
-          "source" :  "gh",
-          "number" : "1",
-          "repo" : "myrepo",
-          "owner" : "myowner",
-          "milestone" : "m1",
-          "labels" : "enhancement,  question  "
+          "gh.url" : "https://github.com/marcboscher/cctest/issues/1",
+          "gh.assignee" : "marcboscher",
+          "gh.number" : "1",
+          "gh.repo" : "myrepo",
+          "gh.owner" : "myowner",
+          "gh.milestone" : "m1",
+          "gh.labels" : "enhancement,  question  "
         }
       }),
       expectedIssue = {
@@ -119,22 +117,6 @@ describe("github.issue", function () {
       issueModule.fromItem(it).should.eql(expectedIssue);
     });
   });
-
-  describe("getIssues with no otions", function () {
-    
-    var recorder = record('github/issue.getIssues_no_options');
-    before(recorder.before);
-    after(recorder.after);
-
-    it("must return an array of issues whose title should be a string", function () {
-      return issueModule.getIssues().then(function (issues) {
-        //console.log(issues);
-        issues.forEach(function (issue) {
-          issue.title.should.be.a.String;
-        });
-      });
-    });
-  });
   
   describe("getIssues with owner and repo", function () {
     
@@ -145,8 +127,8 @@ describe("github.issue", function () {
     it("must return an array of valid issues whose title should be a string", function () {
       return issueModule.getIssues(
           {
-            "owner": "marcboscher", 
-            "repo": "cctest", 
+            "gh.owner": "marcboscher", 
+            "gh.repo": "cctest", 
             "excludeWithLabels" : ["invalid", "enhancement"]
           }
         )
@@ -170,7 +152,7 @@ describe("github.issue", function () {
     after(recorder.after);
 
     it("must return an array of items", function () {
-      return issueModule.getItems({"owner": "marcboscher", "repo": "cctest"}).then(function (items) {
+      return issueModule.getItems({"gh.owner": "marcboscher", "gh.repo": "cctest"}).then(function (items) {
         //console.log(items);
         items.forEach(function (items) {
           items.title.should.be.a.String;
@@ -194,18 +176,18 @@ describe("github.issue", function () {
           "fields" : {
             //"assignee" : "marcboscher",
             //"milestone" : "1",
-            "labels" : "invalid",
-            "number" : "10",
-            "owner" : "marcboscher",
-            "repo" : "cctest"
+            "gh.labels" : "invalid",
+            "gh.number" : "10",
+            "gh.owner" : "marcboscher",
+            "gh.repo" : "cctest"
           }
         }),
         oldItem = item.create(
           {
           "fields" : {
-            "number" : "10",
-            "owner" : "marcboscher",
-            "repo" : "cctest"
+            "gh.number" : "10",
+            "gh.owner" : "marcboscher",
+            "gh.repo" : "cctest"
           }
         });
     
@@ -229,16 +211,16 @@ describe("github.issue", function () {
           "body" : "this is a test\n\nextra line",
           "completed" : false,
           "fields" : {
-            "assignee" : "marcboscher",
-            "milestone" : "1",
-            "labels" : "invalid",
-            "owner" : "marcboscher",
-            "repo" : "cctest"
+            "gh.assignee" : "marcboscher",
+            "gh.milestone" : "1",
+            "gh.labels" : "invalid",
+            "gh.owner" : "marcboscher",
+            "gh.repo" : "cctest"
           }
         });
     
       return issueModule.createItem(itemToCreate).then(function (itemCreated) {
-        itemCreated.title.should.eql("#" + itemCreated.fields.number + " " + itemToCreate.title);
+        itemCreated.title.should.eql("#" + itemCreated.fields["gh.number"] + " " + itemToCreate.title);
         itemCreated.body.should.eql(itemToCreate.body);
         itemCreated.completed.should.eql(itemToCreate.completed);
       });
@@ -257,14 +239,14 @@ describe("github.issue", function () {
           "title" : "create test in complete state",
           "completed" : true,
           "fields" : {
-            "labels" : "invalid",
-            "owner" : "marcboscher",
-            "repo" : "cctest"
+            "gh.labels" : "invalid",
+            "gh.owner" : "marcboscher",
+            "gh.repo" : "cctest"
           }
         });
     
       return issueModule.createItem(itemToCreate).then(function (itemCreated) {
-        itemCreated.title.should.eql(conf.get("github.issueNumberPrefix") + itemCreated.fields.number + " " + itemToCreate.title);
+        itemCreated.title.should.eql(conf.get("github.issueNumberPrefix") + itemCreated.fields["gh.number"] + " " + itemToCreate.title);
         itemCreated.completed.should.eql(itemToCreate.completed);
       });
     });

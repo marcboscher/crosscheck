@@ -17,7 +17,7 @@ describe("asana.task.", function () {
         "id" : 17620819608823,
         "modified_at" : "2014-10-10T18:39:25.654Z",
         "name" : "#2 Reference issue",
-        "notes" : "some **bold** text. some *italic* text\n\na list\n- foo\n- bar\n- a sublist\n  - a\n  - b\n  - c\n- baz\n\n\n#link https://github.com/marcboscher/job-template/issues/2\n#assignee marcboscher\n#src gh\n#id 45417090\n#repo job-template\n#owner marcboscher",
+        "notes" : "some **bold** text. some *italic* text\n\na list\n- foo\n- bar\n- a sublist\n  - a\n  - b\n  - c\n- baz\n\n\n#gh.link https://github.com/marcboscher/job-template/issues/2\n#gh.assignee marcboscher\n#gh.src gh\n#gh.id 45417090\n#gh.repo job-template\n#gh.owner marcboscher",
         //"notes" : "some **bold** text\n#link https://github.com/marcboscher/job-template/issues/2\n#assignee marcboscher\n#src gh\n#id 45417090\n#repo job-template\n#owner marcboscher",
         "completed" : false,
         "assignee" : {
@@ -59,12 +59,12 @@ describe("asana.task.", function () {
           "#gh.state open"
         ],
         "fields" : {
-          "link" : "https://github.com/marcboscher/job-template/issues/2",
-          "assignee" : "marcboscher",
-          "src" :  "gh",
-          "id" : "45417090",
-          "repo" : "job-template",
-          "owner" : "marcboscher"
+          "gh.link" : "https://github.com/marcboscher/job-template/issues/2",
+          "gh.assignee" : "marcboscher",
+          "gh.src" :  "gh",
+          "gh.id" : "45417090",
+          "gh.repo" : "job-template",
+          "gh.owner" : "marcboscher"
         }
       });
       
@@ -89,19 +89,19 @@ describe("asana.task.", function () {
             "#gh.state open"
           ],
           "fields" : {
-            "link" : "https://github.com/marcboscher/job-template/issues/2",
-            "assignee" : "marcboscher",
-            "src" :  "gh",
-            "id" : "45417090",
-            "repo" : "job-template",
-            "owner" : "marcboscher"
+            "gh.link" : "https://github.com/marcboscher/job-template/issues/2",
+            "gh.assignee" : "marcboscher",
+            "gh.src" :  "gh",
+            "gh.id" : "45417090",
+            "gh.repo" : "job-template",
+            "gh.owner" : "marcboscher"
           }
         }),
 
       expectedTask = {
         "data" : {
           "name" : "#2 Reference issue",
-          "notes" : "some **bold** text. some *italic* text\n\na list\n- foo\n- bar\n- a sublist\n  - a\n  - b\n  - c\n- baz\n\n\n#link https://github.com/marcboscher/job-template/issues/2\n#assignee marcboscher\n#src gh\n#id 45417090\n#repo job-template\n#owner marcboscher",
+          "notes" : "some **bold** text. some *italic* text\n\na list\n- foo\n- bar\n- a sublist\n  - a\n  - b\n  - c\n- baz\n\n\n#gh.link https://github.com/marcboscher/job-template/issues/2\n#gh.assignee marcboscher\n#gh.src gh\n#gh.id 45417090\n#gh.repo job-template\n#gh.owner marcboscher",
           "completed" : false,
         }
       };

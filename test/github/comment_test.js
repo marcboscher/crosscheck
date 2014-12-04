@@ -34,7 +34,7 @@ describe("github.comment.", function () {
         "fields" : {
           "field1" : "aaa",
           "field2" : "",
-          "gh_id" : "62769730"
+          "gh.id" : "62769730"
         }
       });
       
@@ -51,12 +51,12 @@ describe("github.comment.", function () {
           "fields" : {
             "field1" : "ddd",
             "field2" : "",
-            "as_id" : "223344"
+            "aa.id" : "223344"
           }
         }),
 
         expectedComment = {
-          "body" : "this is a comment\nover multiple lines\n\n\n#as_id 223344"
+          "body" : "this is a comment\nover multiple lines\n\n\n#aa.id 223344"
         };
         
       commentModule.fromComment(inputComment).should.eql(expectedComment);
@@ -93,9 +93,9 @@ describe("github.comment.", function () {
       return commentModule.getComments(item.create(
           {
             fields : {
-              number : 38,
-              owner : "marcboscher",
-              repo : "cctest"
+              "gh.number" : 38,
+              "gh.owner" : "marcboscher",
+              "gh.repo" : "cctest"
             }
           }
         ))
@@ -129,9 +129,9 @@ describe("github.comment.", function () {
         itemToCommentOn = item.create(
           {
             fields : {
-              number : 38,
-              owner : "marcboscher",
-              repo : "cctest"
+              "gh.number" : 38,
+              "gh.owner" : "marcboscher",
+              "gh.repo" : "cctest"
             }
           }
         );
@@ -141,7 +141,7 @@ describe("github.comment.", function () {
           commentCreated.body.should.eql(commentToCreate.body + "\n\n");
           commentCreated.fields.foo.should.eql(commentToCreate.fields.foo);
           commentCreated.fields.baz.should.eql(commentToCreate.fields.baz);
-          commentCreated.fields.should.have.properties("gh_id");
+          commentCreated.fields.should.have.properties("gh.id");
         }
       );
     });
@@ -159,20 +159,20 @@ describe("github.comment.", function () {
           body : "Updated comment body " + _.random(9999) + 
             "\nLast updated on " + new Date(),
           fields : {
-            as_id : "223344"
+            "aa.id" : "223344"
           }
         }),
         oldComment = comment.create({
           fields : {
-            gh_id : "62577747"
+            "gh.id" : "62577747"
           }
         }),
 
         parentItem = item.create(
           {
             "fields" : {
-              "owner" : "marcboscher",
-              "repo" : "cctest"
+              "gh.owner" : "marcboscher",
+              "gh.repo" : "cctest"
             }
           });
     
@@ -193,15 +193,15 @@ describe("github.comment.", function () {
     it("must not fail", function () {
       var commentToDelete = comment.create({
           fields : {
-            gh_id : "62776366"
+            "gh.id" : "62776366"
           }
         }),
 
         parentItem = item.create(
           {
             "fields" : {
-              "owner" : "marcboscher",
-              "repo" : "cctest"
+              "gh.owner" : "marcboscher",
+              "gh.repo" : "cctest"
             }
           });
     

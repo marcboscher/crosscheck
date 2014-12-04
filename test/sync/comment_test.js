@@ -12,7 +12,7 @@ describe("sync/comment", function () {
       var asanaComments = [
           comment.create({
             body : "create in github",
-            fields : {as_id : "1"}
+            fields : {"aa.id" : "1"}
           })
         ],
         gitHubComments = [],
@@ -38,7 +38,7 @@ describe("sync/comment", function () {
         gitHubComments = [
           comment.create({
             body : "create in asana",
-            fields : {gh_id : "1"}
+            fields : {"gh.id" : "1"}
           })
         ],
         expectedOperations = {
@@ -62,14 +62,14 @@ describe("sync/comment", function () {
           comment.create({
             body : "update in asana - identical",
             lastUpdated : 1,
-            fields : {as_id : "1", foo : "bar"}
+            fields : {"aa.id" : "1", foo : "bar"}
           })
         ],
         gitHubComments = [
           comment.create({
             body : "update in asana - identical",
             lastUpdated : 3,
-            fields : {as_id : "1", baz : "quz"}
+            fields : {"aa.id" : "1", baz : "quz"}
           })
         ],
         expectedOperations = {
@@ -94,14 +94,14 @@ describe("sync/comment", function () {
           comment.create({
             body : "update in asana - asana",
             lastUpdated : 1,
-            fields : {as_id : "1"}
+            fields : {"aa.id" : "1"}
           })
         ],
         gitHubComments = [
           comment.create({
             body : "update in asana - github",
             lastUpdated : 3,
-            fields : {as_id : "1"}
+            fields : {"aa.id" : "1"}
           })
         ],
         expectedOperations = {
@@ -131,14 +131,14 @@ describe("sync/comment", function () {
           comment.create({
             body : "update in github - asana",
             lastUpdated : 3,
-            fields : {as_id : "1"}
+            fields : {"aa.id" : "1"}
           })
         ],
         gitHubComments = [
           comment.create({
             body : "update in github - github",
             lastUpdated : 1,
-            fields : {as_id : "1"}
+            fields : {"aa.id" : "1"}
           })
         ],
         expectedOperations = {
@@ -167,14 +167,14 @@ describe("sync/comment", function () {
           comment.create({
             body : "update in asana - asana",
             lastUpdated : 1,
-            fields : {gh_id : "1"}
+            fields : {"gh.id" : "1"}
           })
         ],
         gitHubComments = [
           comment.create({
             body : "update in asana - github",
             lastUpdated : 3,
-            fields : {gh_id : "1"}
+            fields : {"gh.id" : "1"}
           })
         ],
         expectedOperations = {
@@ -204,14 +204,14 @@ describe("sync/comment", function () {
           comment.create({
             body : "update in github - asana",
             lastUpdated : 3,
-            fields : {gh_id : "1"}
+            fields : {"gh.id" : "1"}
           })
         ],
         gitHubComments = [
           comment.create({
             body : "update in github - github",
             lastUpdated : 1,
-            fields : {gh_id : "1"}
+            fields : {"gh.id" : "1"}
           })
         ],
         expectedOperations = {
@@ -240,7 +240,7 @@ describe("sync/comment", function () {
         gitHubComments = [
           comment.create({
             body : "delete in github because no matching asana comment",
-            fields : {as_id : "1"}
+            fields : {"aa.id" : "1"}
           })
         ],
         expectedOperations = {
@@ -263,7 +263,7 @@ describe("sync/comment", function () {
       var asanaComments = [
           comment.create({
             body : "delete in asana because no matching github comment",
-            fields : {gh_id : "1"}
+            fields : {"gh.id" : "1"}
           })
         ],
         gitHubComments = [],
@@ -297,9 +297,9 @@ describe("sync/comment", function () {
           gitHubItem = item.create({
           title : "hello world",
           fields : {
-            owner : "marcboscher",
-            repo : "cctest",
-            number : 33
+            "gh.owner" : "marcboscher",
+            "gh.repo" : "cctest",
+            "gh.number" : 33
           }
         });
 

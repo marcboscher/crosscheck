@@ -27,7 +27,7 @@ describe("asana.story.", function () {
         "fields" : {
           "field1" : "ddd",
           "field2" : "",
-          "as_id" : "18704113106165"
+          "aa.id" : "18704113106165"
         }
       });
       
@@ -44,13 +44,13 @@ describe("asana.story.", function () {
           "fields" : {
             "field1" : "ddd",
             "field2" : "",
-            "gh_id" : "112233"
+            "gh.id" : "112233"
           }
         }),
 
         expectedStory = {
           "data" : {
-            "text" : "this is a comment\nover multiple lines\n\n\n#gh_id 112233"
+            "text" : "this is a comment\nover multiple lines\n\n\n#gh.id 112233"
           }
         };
         
@@ -118,7 +118,7 @@ describe("asana.story.", function () {
       return storyModule.createComment(commentToCreate, itemToCommentOn)
         .then(function (commentCreated) {
           commentCreated.body.should.eql(commentToCreate.body + "\n\n");
-          commentCreated.fields.should.have.properties("foo", "baz", "as_id");
+          commentCreated.fields.should.have.properties("foo", "baz", "aa.id");
           commentCreated.fields.foo.should.eql(commentToCreate.fields.foo);
           commentCreated.fields.baz.should.eql(commentToCreate.fields.baz);
 
