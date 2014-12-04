@@ -65,7 +65,6 @@ describe("github.issue", function () {
         "body" : "some **bold** text. some *italic* text\n\na list\n- foo\n- bar\n- a sublist\n  - a\n  - b\n  - c\n- baz",
         "completed" : false,
         "lastUpdated" : 1412966272000,
-        // TODO support tags
         "tags" : [],
         // "tags" : [
           // "#gh.milestone m1",
@@ -78,7 +77,6 @@ describe("github.issue", function () {
           "gh.number" : "1",
           "gh.repo" : "myrepo",
           "gh.owner" : "myowner",
-          // TODO remove when support tags
           "gh.milestone" : "m1",
           "gh.labels" : "enhancement, question"
         }
@@ -110,7 +108,6 @@ describe("github.issue", function () {
         "labels": [ "enhancement", "question" ],
         "state": "open",
         "assignee": "marcboscher"
-        // TODO support milestone
         //"milestone": "m1"
       };
       
