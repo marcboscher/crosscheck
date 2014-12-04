@@ -34,7 +34,8 @@ describe("github.comment.", function () {
         "fields" : {
           "field1" : "aaa",
           "field2" : "",
-          "gh.id" : "62769730"
+          "gh.id" : "62769730",
+          "gh.commenter" : "marcboscher"
         }
       });
       
@@ -51,12 +52,13 @@ describe("github.comment.", function () {
           "fields" : {
             "field1" : "ddd",
             "field2" : "",
-            "aa.id" : "223344"
+            "aa.id" : "223344",
+            "aa.commenter" : "Marc Boscher"
           }
         }),
 
         expectedComment = {
-          "body" : "this is a comment\nover multiple lines\n\n\n#aa.id 223344"
+          "body" : "this is a comment\nover multiple lines\n\n\n#aa.id 223344\n#aa.commenter Marc Boscher"
         };
         
       commentModule.fromComment(inputComment).should.eql(expectedComment);

@@ -27,7 +27,8 @@ describe("asana.story.", function () {
         "fields" : {
           "field1" : "ddd",
           "field2" : "",
-          "aa.id" : "18704113106165"
+          "aa.id" : "18704113106165",
+          "aa.commenter" : "Marc Boscher"
         }
       });
       
@@ -44,13 +45,14 @@ describe("asana.story.", function () {
           "fields" : {
             "field1" : "ddd",
             "field2" : "",
-            "gh.id" : "112233"
+            "gh.id" : "112233",
+            "gh.commenter" : "marcboscher"
           }
         }),
 
         expectedStory = {
           "data" : {
-            "text" : "this is a comment\nover multiple lines\n\n\n#gh.id 112233"
+            "text" : "this is a comment\nover multiple lines\n\n\n#gh.id 112233\n#gh.commenter marcboscher"
           }
         };
         
