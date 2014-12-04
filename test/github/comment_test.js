@@ -58,7 +58,7 @@ describe("github.comment.", function () {
         }),
 
         expectedComment = {
-          "body" : "this is a comment\nover multiple lines\n\n\n#aa.id 223344\n#aa.commenter Marc Boscher"
+          "body" : "this is a comment\nover multiple lines\n\n\n#aa.commenter Marc Boscher\n#aa.id 223344"
         };
         
       commentModule.fromComment(inputComment).should.eql(expectedComment);

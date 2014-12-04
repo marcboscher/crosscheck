@@ -52,7 +52,7 @@ describe("asana.story.", function () {
 
         expectedStory = {
           "data" : {
-            "text" : "this is a comment\nover multiple lines\n\n\n#gh.id 112233\n#gh.commenter marcboscher"
+            "text" : "this is a comment\nover multiple lines\n\n\n#gh.commenter marcboscher\n#gh.id 112233"
           }
         };
         
