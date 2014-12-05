@@ -5,6 +5,7 @@
     "keywordSeparator" : ".",
     "fieldSeparator" : " ",
     "emptyFieldValue" : "",
+    "cacheLocation" : "./cache",
 
     "asana" : {
       "keyword" : "aa", // WARNING: not fully supported. DO NOT CHANGE

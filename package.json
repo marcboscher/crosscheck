@@ -26,11 +26,12 @@
     "js-yaml": "^3.2.2",
     "lodash": "^2.4.1",
     "minimist": "^1.1.0",
+    "node-localstorage": "^0.3.4",
     "should": "^4.0.4",
     "stampit": "^1.1.0",
+    "string.prototype.endswith": "^0.2.0",
     "superagent": "^0.20.0",
-    "superagent-bluebird-promise": "^0.3.0",
-    "string.prototype.endswith": "^0.2.0"
+    "superagent-bluebird-promise": "^0.3.0"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "^0.10.0",
