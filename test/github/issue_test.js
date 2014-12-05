@@ -115,9 +115,9 @@ describe("github.issue", function () {
     });
   });
   
-  describe("getIssues with owner and repo", function () {
+  describe("getIssues", function () {
     
-    var recorder = record('github/issue.getIssues_with_options');
+    var recorder = record('github/issue.getIssues');
     before(recorder.before);
     after(recorder.after);
 
@@ -125,9 +125,9 @@ describe("github.issue", function () {
       return issueModule.getIssues(
           {
             "gh.owner": "marcboscher", 
-            "gh.repo": "cctest", 
-            "excludeWithLabels" : ["invalid", "enhancement"]
-          }
+            "gh.repo": "cctest"
+          },
+          ["invalid", "enhancement"]
         )
         .then(function (issues) {
         //console.log(issues);

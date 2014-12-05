@@ -1,6 +1,7 @@
 /*global describe,it*/
 'use strict';
 var sync = require("../../lib/sync/item"),
+  opsModule = require("../../lib/sync/ops"),
   item = require("../../lib/item"),
   comment = require("../../lib/comment"),
   cache = require("../../lib/cache"),
@@ -8,26 +9,23 @@ var sync = require("../../lib/sync/item"),
 
 describe("sync/item", function () {
   describe("diff", function () {
-    it("ignores asana items with a github number but no matching github item", function () {
+    it("deletes asana items with a github number but no matching github item", function () {
       var asanaItems = [
           item.create({
-            title : "ignore because no matching github number",
+            title : "delete because no matching github number",
             managerId : "1000",
             fields : {"gh.number" : 1}
           })
         ],
         gitHubItems = [],
-        expectedOperations = {
+        expectedOperations = opsModule.create({
           asana : {
+            parent : null,
             create : [],
-            update : []
-          },
-          github : {
-            create : [],
-            update : []
-          },
-          toDiffComments : []
-        };
+            update : [],
+            del : [asanaItems[0]]
+          }
+        });
        
       sync.diff(asanaItems, gitHubItems).should.eql(expectedOperations);
     }); 
@@ -40,17 +38,14 @@ describe("sync/item", function () {
           })
         ],
         gitHubItems = [],
-        expectedOperations = {
-          asana : {
-            create : [],
-            update : []
-          },
+        expectedOperations = opsModule.create({
           github : {
+            parent : null,
             create : [asanaItems[0]],
-            update : []
-          },
-          toDiffComments : [] 
-        };
+            update : [],
+            del : []
+          }
+        });
        
       sync.diff(asanaItems, gitHubItems).should.eql(expectedOperations);
     });
@@ -64,17 +59,14 @@ describe("sync/item", function () {
             title : "create in asana because not in asana"
           })
         ],
-        expectedOperations = {
+        expectedOperations = opsModule.create({
           asana : {
+            parent : null,
             create : [gitHubItems[0]],
-            update : []
-          },
-          github : {
-            create : [],
-            update : []
-          },
-          toDiffComments : [] 
-        };
+            update : [],
+            del : []
+          }
+        });
        
       sync.diff(asanaItems, gitHubItems).should.eql(expectedOperations);
     });
@@ -97,17 +89,7 @@ describe("sync/item", function () {
             fields : {"gh.number" : 2}
           })
         ],
-        expectedOperations = {
-          asana : {
-            create : [],
-            update : []
-          },
-          github : {
-            create : [],
-            update : []
-          },
-          toDiffComments : [] 
-        };
+        expectedOperations = opsModule.create();
       
       cache.clear();
       cache.setLastSync("1000", 999);
@@ -132,22 +114,19 @@ describe("sync/item", function () {
             fields : {"gh.number" : 2}
           })
         ],
-        expectedOperations = {
+        expectedOperations = opsModule.create({
           asana : {
+            parent : null,
             create : [],
             update : [
               {
-                oldItem : asanaItems[0],
-                newItem : gitHubItems[0]
+                old : asanaItems[0],
+                nue : gitHubItems[0]
               }
-            ]
-          },
-          github : {
-            create : [],
-            update : []
-          },
-          toDiffComments : [] 
-        };
+            ],
+            del : []
+          }
+        });
       
       cache.clear();
       cache.setLastSync("1000", 999);
@@ -172,22 +151,19 @@ describe("sync/item", function () {
             fields : {"gh.number" : 2}
           })
         ],
-        expectedOperations = {
-          asana : {
-            create : [],
-            update : []
-          },
+        expectedOperations = opsModule.create({
           github : {
+            parent : null,
             create : [],
             update : [
               {
-                oldItem : gitHubItems[0],
-                newItem : asanaItems[0]
+                old : gitHubItems[0],
+                nue : asanaItems[0]
               }
-            ]
-          },
-          toDiffComments : [] 
-        };
+            ],
+            del : []
+          }
+        });
       
       cache.clear();
       cache.setLastSync("1000", 999);
@@ -212,22 +188,14 @@ describe("sync/item", function () {
             fields : {"gh.number" : 2}
           })
         ],
-        expectedOperations = {
-          asana : {
-            create : [],
-            update : []
-          },
-          github : {
-            create : [],
-            update : []
-          },
-          toDiffComments : [
+        expectedOperations = opsModule.create({
+          toDiffChildren : [
             {
-              asanaItem : asanaItems[0],
-              gitHubItem : gitHubItems[0]
+              asana : asanaItems[0],
+              github : gitHubItems[0]
             }
           ] 
-        };
+        });
       
       cache.clear();
       sync.diff(asanaItems, gitHubItems).should.eql(expectedOperations);
@@ -251,22 +219,14 @@ describe("sync/item", function () {
             fields : {"gh.number" : 2}
           })
         ],
-        expectedOperations = {
-          asana : {
-            create : [],
-            update : []
-          },
-          github : {
-            create : [],
-            update : []
-          },
-          toDiffComments : [
+        expectedOperations = opsModule.create({
+          toDiffChildren : [
             {
-              asanaItem : asanaItems[0],
-              gitHubItem : gitHubItems[0]
+              asana : asanaItems[0],
+              github : gitHubItems[0]
             }
           ] 
-        };
+        });
       
       cache.clear();
       cache.setLastSync("1000", 1);
@@ -291,22 +251,14 @@ describe("sync/item", function () {
             fields : {"gh.number" : 2}
           })
         ],
-        expectedOperations = {
-          asana : {
-            create : [],
-            update : []
-          },
-          github : {
-            create : [],
-            update : []
-          },
-          toDiffComments : [
+        expectedOperations = opsModule.create({
+          toDiffChildren : [
             {
-              asanaItem : asanaItems[0],
-              gitHubItem : gitHubItems[0]
+              asana : asanaItems[0],
+              github : gitHubItems[0]
             }
           ] 
-        };
+        });
       
       cache.clear();
       cache.setLastSync("1000", 222);
