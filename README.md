@@ -1,5 +1,5 @@
 
-> Helping products managers track their products across multiple tools.
+> Collaborate across tools.
 
 *This project is still at an early stage and should considered experimental.*
 
@@ -22,7 +22,7 @@ Check out [**The Big Picture**]
 
 #### ~~Limitations~~ Roadmap
 
-- Synchronize Comments (coming soon!!!)
+- ~~Synchronize Comments~~ done!
 - Map GitHub labels to Asana tags
 - Map GitHub milestones to Asana tags
 - Map GitHub assignees to Asana assignees (only if assigned to you)
@@ -31,7 +31,7 @@ Check out [**The Big Picture**]
 - OAuth support
 
 #### How It Works
-To sync an Asana project with a GitHub repo, prefix the project name with `#cc` and specify the `#source`, `#owner` and `#repo` in the project description. There's nothing to do on the GitHub side.
+To sync an Asana project with a GitHub repo, prefix the project name with `#cc` and specify the `#owner` and `#repo` in the project description. There's nothing to do on the GitHub side.
 
 ![Asana project config](asana-setup.png)
 
