@@ -6,6 +6,7 @@
     "fieldSeparator" : " ",
     "emptyFieldValue" : "",
     "cacheLocation" : "./cache",
+    "lastSyncSafety" : 5000,
 
     "asana" : {
       "keyword" : "aa", // WARNING: not fully supported. DO NOT CHANGE
