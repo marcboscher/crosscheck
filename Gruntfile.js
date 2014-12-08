@@ -45,15 +45,31 @@ module.exports = function (grunt) {
       //all: ['test/crosscheck_test.js']
       //all: ['test/conf_test.js']
     },
+
     jsdoc : {
-        dist : {
-            src: ['lib/**/*.js', "README.md"], 
-            options: {
-                destination: 'doc',
-                template: "node_modules/ink-docstrap/template",
-                configure: "jsdoc.conf.json"
-            }
+      dist : {
+          src: ['lib/**/*.js', "README.md"], 
+          options: {
+              destination: 'doc',
+              template: "node_modules/ink-docstrap/template",
+              configure: "jsdoc.conf.json"
+          }
+      }
+    },
+    browserify: {
+      dist : {
+        src: './lib/crosscheck.js',
+        dest: 'dist/crosscheck.js',
+        options: {
+          // Exclude optional config file dependencies of node-config.
+          // Browser won't use config files...
+          exclude: ['yaml', 'json5', 'cson', 'properties', 'coffee-script'],
+          browserifyOptions: {
+            standalone: 'crosscheck',
+            // debug: false
+          }  
         }
+      }
     },
     watch: {
       gruntfile: {
@@ -67,6 +83,7 @@ module.exports = function (grunt) {
       lib: {
         files: '<%= jshint.lib.src %>',
         tasks: ['jshint:lib', 'mochacli']
+        //tasks: ['jshint:lib', 'mochacli', 'browserify']
       },
       test: {
         files: '<%= jshint.test.src %>',
@@ -76,5 +93,5 @@ module.exports = function (grunt) {
   });
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'mochacli', 'jsdoc']);
+  grunt.registerTask('default', ['jshint', 'mochacli', 'browserify' ,'jsdoc']);
 };

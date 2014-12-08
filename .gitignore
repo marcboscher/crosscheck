@@ -1,4 +1,5 @@
 /node_modules/
+/dist/
 /cache/
 /test-cache/
 npm-debug.log

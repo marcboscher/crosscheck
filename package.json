@@ -22,8 +22,8 @@
   ],
   "dependencies": {
     "bluebird": "^2.3.5",
-    "config": "^1.6.0",
     "js-yaml": "^3.2.2",
+    "config": "^1.6.0",
     "lodash": "^2.4.1",
     "minimist": "^1.1.0",
     "node-localstorage": "^0.3.4",
@@ -34,6 +34,7 @@
     "superagent-bluebird-promise": "^0.3.0"
   },
   "devDependencies": {
+    "grunt-browserify": "^3.2.1",
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-nodeunit": "^0.3.3",
     "grunt-contrib-watch": "^0.6.1",
