@@ -7,19 +7,27 @@ var conf = require("../lib/conf"),
   
 describe("conf.", function () {
   describe("get", function () {
-    it("returns an object", function () {
-      //console.log(conf.get());
+    it.skip("returns an object", function () {
       conf.get().should.be.an.object;
     });
-    
   });
   
-  describe("overrideDefaults", function () {
-    it("gets the defaults and overrides", function () {
-      conf.overrideDefaults({"conf_test": "test"});
-      conf.get("conf_test").should.eql("test");
-      _.keys(conf.get()).length.should.be.greaterThan(1);
+
+  describe("reconfigure", function () {
+    it("gets the default and overrides it", function () {
+      conf.get("asana.keyword").should.eql("aa");
+      
+      conf.reconfigure({ asana : { keyword : "test" }});
+      conf.get("asana.keyword").should.eql("test");
+
+      // Check other configs are unaffected
+      conf.get("github.keyword").should.eql("gh"); 
+
+      // Restore
+      conf.reconfigure({ asana : { keyword : "aa" }});
+      conf.get("asana.keyword").should.eql("aa");
     });
+
     
   });
   

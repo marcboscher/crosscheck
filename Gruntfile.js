@@ -35,8 +35,8 @@ module.exports = function (grunt) {
         timeout: 10000,
         bail: true
       },
-      all: ['test/**/*.js']
-      //all: ['test/sync_test.js']
+      all: ['test/**/*.js'],
+      //conf: ['test/conf_test.js']
       //all: ['test/github_test.js']
       //all: ['test/asana/project_test.js']
       //all: ['test/asana/*_test.js']
@@ -82,8 +82,8 @@ module.exports = function (grunt) {
       },
       lib: {
         files: '<%= jshint.lib.src %>',
-        tasks: ['jshint:lib', 'mochacli']
-        //tasks: ['jshint:lib', 'mochacli', 'browserify']
+        //tasks: ['jshint:lib', 'mochacli']
+        tasks: ['jshint:lib', 'mochacli', 'browserify']
       },
       test: {
         files: '<%= jshint.test.src %>',
