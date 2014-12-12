@@ -11,6 +11,7 @@ module.exports = function (grunt) {
     nodeunit: {
       files: ['test/**/*_test.js']
     },
+
     jshint: {
       options: {
         jshintrc: '.jshintrc',
@@ -29,6 +30,7 @@ module.exports = function (grunt) {
         src: ['test/**/*.js']
       }
     },
+
     mochacli: {
       options: {
         //reporter: 'nyan',
@@ -56,21 +58,24 @@ module.exports = function (grunt) {
           }
       }
     },
+
     browserify: {
       dist : {
-        src: './lib/crosscheck.js',
+        src: 'lib/crosscheck.js',
         dest: 'dist/crosscheck.js',
+        // For dev
+        // dest: '../crosscheck-chrome/app/bower_components/crosscheck/index.js',
         options: {
+          // Expose our main browser API and underlying utility libs
+          alias : ["./lib/browser.js:crosscheck", 'lodash', 'bluebird', 'superagent'],
           // Exclude optional config file dependencies of node-config.
           // Browser won't use config files...
-          exclude: ['yaml', 'json5', 'cson', 'properties', 'coffee-script'],
-          browserifyOptions: {
-            standalone: 'crosscheck',
-            // debug: false
-          }  
+          exclude: ['js-yaml', 'yaml', 'json5', 'cson', 'properties', 'coffee-script', 'iced-coffee-script'],
+          browserifyOptions: {}  
         }
       }
     },
+
     watch: {
       gruntfile: {
         files: '<%= jshint.gruntfile.src %>',
