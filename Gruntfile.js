@@ -67,7 +67,7 @@ module.exports = function (grunt) {
         // dest: '../crosscheck-chrome/app/bower_components/crosscheck/index.js',
         options: {
           // Expose our main browser API and underlying utility libs
-          alias : ["./lib/browser.js:crosscheck", 'lodash', 'bluebird', 'superagent'],
+          alias : ["./lib/browser.js:crosscheck", 'asana', 'lodash', 'bluebird', 'superagent'],
           // Exclude optional config file dependencies of node-config.
           // Browser won't use config files...
           exclude: ['js-yaml', 'yaml', 'json5', 'cson', 'properties', 'coffee-script', 'iced-coffee-script'],
