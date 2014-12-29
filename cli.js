@@ -7,6 +7,18 @@ var crosscheck = require('./lib/crosscheck.js'),
   _ = require("lodash"),
   interval;
 
+function runSync ()  {
+  console.log("------------------------------------------------------");
+  console.log("Sync - " + new Date());
+  
+  crosscheck.sync()
+  .then(function (logs) {
+    _.forEach(logs, function (log) {
+      console.log(log);
+    });
+  });  
+}
+
 if (argv.h || argv.help) {
     return console.log('Refer to https://github.com/marcboscher/crosscheck for help');
 }
@@ -16,7 +28,7 @@ if (argv.v || argv.version) {
 }
 
 // Run once/a first time
-crosscheck.sync();
+runSync();
 
 // If requested, also run on interval
 if (argv.t || argv.timer) {
@@ -25,5 +37,5 @@ if (argv.t || argv.timer) {
     return console.log("Time interval '%s' is not a number", interval);
   }
   interval *= 1000; // convert to ms
-  setInterval(crosscheck.sync, interval);
+  setInterval(runSync, interval);
 }
