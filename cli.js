@@ -10,11 +10,13 @@ var crosscheck = require('./lib/crosscheck.js'),
 function runSync ()  {
   console.log("------------------------------------------------------");
   console.log("Sync - " + new Date());
-  
+
   crosscheck.sync()
   .then(function (logs) {
     _.forEach(logs, function (log) {
-      console.log(log);
+      _.forEach(log.opsLog, function (opsLog) {
+        console.log(opsLog);
+      });
     });
   });  
 }

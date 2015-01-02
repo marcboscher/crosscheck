@@ -60,6 +60,21 @@ module.exports = function (grunt) {
     },
 
     browserify: {
+      utilLib : {
+        src: 'lib/util-lib.js',
+        dest: 'dist/crosscheck-util-lib.js',
+        // For dev
+        // dest: '../crosscheck-chrome/app/bower_components/crosscheck/util-lib.js',
+        options: {
+          // If change this list, also exclude the same in browerify:dist
+          alias : [
+            'lodash',
+            'bluebird'
+            ],
+          browserifyOptions: {}  
+        }
+      },
+
       dist : {
         src: 'lib/crosscheck.js',
         dest: 'dist/crosscheck.js',
@@ -67,10 +82,11 @@ module.exports = function (grunt) {
         // dest: '../crosscheck-chrome/app/bower_components/crosscheck/index.js',
         options: {
           // Expose our main browser API and underlying utility libs
-          alias : ["./lib/browser.js:crosscheck", 'asana', 'lodash', 'bluebird', 'superagent'],
-          // Exclude optional config file dependencies of node-config.
-          // Browser won't use config files...
+          alias: ["./lib/browser.js:crosscheck"],
+          // Exclude optional config file dependencies of node-config (browser won't use config files...)
           exclude: ['js-yaml', 'yaml', 'json5', 'cson', 'properties', 'coffee-script', 'iced-coffee-script'],
+          // Exclude libs exposed in browserify:utilLib above
+          external: ['lodash', 'bluebird'],
           browserifyOptions: {}  
         }
       }
