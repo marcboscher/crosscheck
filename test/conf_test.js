@@ -7,7 +7,7 @@ var conf = require("../lib/conf"),
   
 describe("conf.", function () {
   describe("get", function () {
-    it.skip("returns an object", function () {
+    it("returns an object", function () {
       conf.get().should.be.an.object;
     });
   });

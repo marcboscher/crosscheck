@@ -19,7 +19,7 @@ describe("cache.", function () {
 		cache.clear();
 	});
 
-  describe.skip("getLastSync", function () {
+  describe("getLastSync", function () {
 		it("must return 0 if managerId is not found", function () {
 		  var lastSync;
 
@@ -39,7 +39,7 @@ describe("cache.", function () {
   });
 
 
-  describe.skip("setLastSync", function () {
+  describe("setLastSync", function () {
 
   	it("must throw on falsy managerId", function () {
 		  (function (){
@@ -79,7 +79,7 @@ describe("cache.", function () {
   });
   
 
-	describe.skip("clear", function () {
+	describe("clear", function () {
   	it("must empty the cache", function () {
 		  var lastSync;
 		  
