@@ -1,7 +1,7 @@
 var nock = require('nock');
 
 nock('https://api.github.com:443')
-  .get('/repos/marcboscher/cctest/issues/38/comments')
+  .get('/repos/marcboscher/cctest/issues/38/comments?page=1&per_page=100')
   .reply(200, 
 
   [

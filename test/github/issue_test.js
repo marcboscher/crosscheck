@@ -115,13 +115,13 @@ describe("github.issue", function () {
     });
   });
   
-  describe("getIssues", function () {
+  describe("getIssues_singlePage", function () {
     
-    var recorder = record('github/issue.getIssues');
+    var recorder = record('github/issue.getIssues_singlePage');
     before(recorder.before);
     after(recorder.after);
 
-    it("must return an array of valid issues whose title should be a string", function () {
+    it("must return a single page of results when there are lest than 100 results (repo marcboscher/cctest)", function () {
       return issueModule.getIssues(
           {
             "gh.owner": "marcboscher", 
@@ -130,15 +130,40 @@ describe("github.issue", function () {
           ["invalid", "enhancement"]
         )
         .then(function (issues) {
-        //console.log(issues);
-        issues.forEach(function (issue) {
-          issue.title.should.be.a.String;
-          issue.labels.forEach(function (label) {
-            label.name.should.not.eql("invalid");
-            label.name.should.not.eql("enhancement");
+          //console.log(issues);
+          issues.length.should.be.lessThan(100);
+          issues.forEach(function (issue) {
+            issue.title.should.be.a.String;
+            issue.labels.forEach(function (label) {
+              label.name.should.not.eql("invalid");
+              label.name.should.not.eql("enhancement");
+            });
+          });
+      });
+    });
+  });
+
+  describe("getIssues_multiPage", function () {
+
+    var recorder = record('github/issue.getIssues_multiPage');
+    before(recorder.before);
+    after(recorder.after);
+
+    it("must return all result pages (unique issues only) when there are more than 100 results (repo play/play)", function () {
+      return issueModule.getIssues(
+          {
+            "gh.owner": "play", 
+            "gh.repo": "play"
+          }
+        )
+        .then(function (issues) {
+          //console.log(issues);
+          issues.length.should.be.greaterThan(100);
+          issues.length.should.be.eql(_.unique(issues, "number").length);
+          issues.forEach(function (issue) {
+            issue.title.should.be.a.String;
           });
         });
-      });
     });
   });
   
@@ -174,7 +199,7 @@ describe("github.issue", function () {
             //"assignee" : "marcboscher",
             //"milestone" : "1",
             "gh.labels" : "invalid",
-            "gh.number" : "10",
+            "gh.number" : "9",
             "gh.owner" : "marcboscher",
             "gh.repo" : "cctest"
           }
@@ -182,7 +207,7 @@ describe("github.issue", function () {
         oldItem = item.create(
           {
           "fields" : {
-            "gh.number" : "10",
+            "gh.number" : "9",
             "gh.owner" : "marcboscher",
             "gh.repo" : "cctest"
           }

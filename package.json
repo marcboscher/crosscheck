@@ -25,6 +25,7 @@
     "bluebird": "^2.3.5",
     "config": "^1.6.0",
     "js-yaml": "^3.2.2",
+    "li": "^1.0.0",
     "lodash": "^2.4.1",
     "minimist": "^1.1.0",
     "node-localstorage": "^0.3.4",

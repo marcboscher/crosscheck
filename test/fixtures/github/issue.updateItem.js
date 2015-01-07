@@ -1,18 +1,18 @@
 var nock = require('nock');
 
 nock('https://api.github.com:443')
-  .patch('/repos/marcboscher/cctest/issues/10')
-  .reply(200, ["1f8b0800000000000003ad944f8fda3010c5bf4ae4532bc13a86c0ee46aa7aaa7ae9f6527a69b7428e331bac3a76643b59d188efdeb1c9d205b47f602b0e488edf6f262f33af27ad5524272bef1b9753ca1b795149bf6a8b0b616a6aa1318ed6dc8ac238b1024b85f0e03c95ceb5e0284bc988285e8072cb3782e816d353cd6bd82016ebd7a0fddbc10f206442f75f885b0cf256be56072ffec8bd177c9325c9b3f934cba6976c44745b176049ced211f1d22bc0aff2bd29b98724389edc189d7c355d924e9349cab284cdf3ec3acf66c9e79bc5389da569f2ee13771eac4ebe79ae4b6ecb64216b788f6db62e907ba24c2535721f35864f431f8c5d66b3d9d5","88f08e7b6e0f3f663c74c364049a30daa39571485a3aa83f761f26c8abec00096012ca3f376281b63762a7d88a77ef8c52e61e19873def4ff25119ba13ee205257e74150d853e3713f96a14e98de4aba9746f7b8a528ea69f85bca32601cfa6ea13cb5ad41864ddd6beca78f8b1c796de184958d97469fecd89e1861c6565ccb3ffc2c188a1d3262c29cfa7a5184e2d7acf3b1cb5b554f1b2b3b2ed6c1160b0264873e9f473c9023d0af9bb8c061f1d075e961c9cb3a2cdf1d570e360fa949f29ffdf3fbf164046ff3924add71859b860982c18935ff1d08a30cee3d8179f891cdaf384f3e5c320d689428237e036e696c0a97df395969c00bba556a446aa9307a8cde1deca234c794121610562eb94760c8a4314bc713b6481986583e613fb0401b136cef0e1ba7d3c584c5f4cac21da18c1bae6ccb16a65c23f29ab1ab5bfd05432d19300966e01339387f4d0e0e950aa4874a9bbf5cc9e216fe060000"], { server: 'GitHub.com',
-  date: 'Mon, 03 Nov 2014 21:49:44 GMT',
+  .patch('/repos/marcboscher/cctest/issues/9')
+  .reply(200, ["1f8b0800000000000003ad94dd8adb3010855f45e8aa8564652771d235945e954269af9a52e80f4196671d51593292ec656bf2ee1d29de749374d34db6e42220eb7c333e9e393d6dada2395d7bdfb89c31dec8ab4afa755b5c0953330b8d71ace65614c6893558268407e79974ae05c7aee9882a5e8072abe771d896d233cd6bd82015abd7a0fdb3b9f71c4442f73f805b0ae2d6be56076ffdc0b9d39ec992e6d9743e9bcfa7e988eab62ec0d2fc7a44bdf40af07b7c6e4aee8104afc91728c97bae49b2209324cd489ae459964f52f2eee3729c6449425ebce5ce83d5e493e7bae4b6244b59c34b6cb27501dc53652aa991fba02d7c1ada48d3c52ccb5e8d28ef","b8e7f6f03bc64337cc44a009a33dfa18c7a36583fa4df77a8abcca0e9000a6a1fca9e10ab4bde13ac754bc7b639432b7c838ec797f868fcab09d700791baba0c82c29e198f9bb10a75c2e456d2fd6b6c8f5b8aa29e85bf952c03c6a1ef16ca73db1a64d8d4adc67efab8c291d7164e58d97869f4d98eed8911666cc5b5fcc52f82a1d8212366cbb9af1745287eca2e1fbbbc55f5acb1b2e3e22ed8624180ecd0e7cb88077204fabb262e70583c745d7a58f1b20ecb77c39583cd7d60d2fc5b7f7a3f1e0ddf6d5632a93bae70d330403034b1e69f036194c1bda7300f3fbaf911e7c9874ba6018d1265c44fc02d8d4de1f23b272b0d7841b74a8d682d15468fd1bb835d8ee60986b30584952bee111832699ca4e364b14cb33c9be5c9ec2b16686382fdfd0ea6d724dc11cab8e1cab66c61ca3b44cea793c577fd01438d0c1862f4633938794a0e0e950aa4874a9bdff05b04aaf8060000"], { server: 'GitHub.com',
+  date: 'Wed, 07 Jan 2015 15:55:22 GMT',
   'content-type': 'application/json; charset=utf-8',
   'transfer-encoding': 'chunked',
   connection: 'close',
   status: '200 OK',
   'x-ratelimit-limit': '5000',
-  'x-ratelimit-remaining': '4989',
-  'x-ratelimit-reset': '1415053790',
+  'x-ratelimit-remaining': '4981',
+  'x-ratelimit-reset': '1420649327',
   'cache-control': 'private, max-age=60, s-maxage=60',
-  etag: '"fc7df1067f4978afbdd02bc8d885c215"',
+  etag: '"e3e30283e7ba643b3b1de2d1243e8e57"',
   'x-oauth-scopes': 'repo',
   'x-accepted-oauth-scopes': '',
   vary: 'Accept, Authorization, Cookie, X-GitHub-OTP',
@@ -23,8 +23,8 @@ nock('https://api.github.com:443')
   'access-control-allow-credentials': 'true',
   'access-control-expose-headers': 'ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
   'access-control-allow-origin': '*',
-  'x-github-request-id': '607FE41B:44A0:5CC3BD6:5457F878',
+  'x-github-request-id': '607FE41B:50F3:1D5F57:54AD56EA',
   'strict-transport-security': 'max-age=31536000; includeSubdomains; preload',
   'x-content-type-options': 'nosniff',
-  'x-served-by': '065b43cd9674091fec48a221b420fbb3',
+  'x-served-by': '76d9828c7e4f1d910f7ba069e90ce976',
   'content-encoding': 'gzip' });
