@@ -264,6 +264,56 @@ describe("sync/item", function () {
       cache.setLastSync("1000", 222);
       sync.diff(asanaItems, gitHubItems).should.eql(expectedOperations);
     });
+
+    it("ignores items in asana whos github repo and owner don't match those in parent aasana project", function () {
+      var asanaItems = [
+          item.create({
+            title : "create in github because no github number",
+            managerId : "1000",
+            fields : {
+              "gh.repo" : "good",
+              "gh.owner" : "good"
+            }
+          }),
+          item.create({
+            title : "ignore because no repo in tasks does not match repo in project",
+            managerId : "2000",
+            fields : {
+              "gh.repo" : "bad",
+              "gh.owner" : "good"
+            }
+          }),
+          item.create({
+            title : "ignore because no owner in tasks does not match owner in project",
+            managerId : "3000",
+            fields : {
+              "gh.repo" : "good",
+              "gh.owner" : "bad"
+            }
+          })
+        ],
+        gitHubItems = [],
+        inputOperations = opsModule.create({}),
+        expectedOperations = opsModule.create({
+          github : {
+            parent : null,
+            create : [asanaItems[0]],
+            update : [],
+            del : []
+          }
+        });
+
+      inputOperations.asana.parent = { 
+          fields : {
+              "gh.repo" : "good",
+              "gh.owner" : "good"
+          }
+        };
+      expectedOperations.asana.parent = inputOperations.asana.parent;
+       
+      sync.diff(asanaItems, gitHubItems, inputOperations).should.eql(expectedOperations);
+    });
+
   });
 
 });
