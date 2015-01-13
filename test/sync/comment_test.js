@@ -245,89 +245,66 @@ describe("sync/comment", function () {
 
   
   // *******************************************************************
-  describe("getParentsWithChildrenError", function () {
-    it("includes asana item with comment create error", function () {
+  describe("hasExecutionError", function () {
+    it("returns true if comment create error", function () {
       var ops = opsModule.create({
           asana : {
-            parent : item.create({managerId : "1"}),
-            create : [comment.create({error : {text : "error"}})],
+            create : [
+              comment.create({error : {text : "error"}}),
+              comment.create()
+            ],
             update : [],
             del : []
           }
         });
-      var expectedParents = {
-        asana : {
-          "1" : true
-        },
-        github : {}
-      };
 
-      sync.getParentsWithChildrenError(ops).should.eql(expectedParents);
+      sync.hasExecutionError(ops).should.eql(true);
     });
 
-    it("includes github item with comment update error", function () {
+    it("returns true if github comment update error", function () {
       var ops = opsModule.create({
           github : {
-            parent : item.create({fields : {"gh.number" : "1"}}),
             create : [comment.create()],
             update : [{nue : comment.create({error : {text : "error"}})}],
             del : [comment.create()]
           }
         });
-      var expectedParents = {
-        asana : {},
-        github : {
-          "1" : true
-        }
-      };
 
-      sync.getParentsWithChildrenError(ops).should.eql(expectedParents);
+      sync.hasExecutionError(ops).should.eql(true);
     });
 
-    it("excludes items without comment errors", function () {
+    it("returns false if no comment errors", function () {
       var ops = opsModule.create({
           asana : {
-            parent : item.create({managerId : "1"}),
-            create : [comment.create()],
+            create : [comment.create(), comment.create()],
             update : [{nue : comment.create()}],
             del : [comment.create()]
           },
           github : {
-            parent : item.create({fields : {"gh.number" : "1"}}),
             create : [comment.create()],
-            update : [{nue : comment.create()}],
+            update : [{nue : comment.create()}, {nue : comment.create()}],
             del : [comment.create()]
           }
         });
-      var expectedParents = {
-        asana : {},
-        github : {}
-      };
 
-      sync.getParentsWithChildrenError(ops).should.eql(expectedParents);
+      sync.hasExecutionError(ops).should.eql(false);
     });
 
-    it("includes items with comment errors due to unsupported operations", function () {
+    it("returns false if errors due to unsupported operations", function () {
       var ops = opsModule.create({
           asana : {
-            parent : item.create({managerId : "1"}),
             create : [comment.create({error : {unsupported : true}})],
             update : [{nue : comment.create({error : {unsupported : true}})}],
             del : [comment.create({error : {unsupported : true}})]
           },
           github : {
-            parent : item.create({fields : {"gh.number" : "1"}}),
             create : [comment.create({error : {unsupported : true}})],
             update : [{nue : comment.create({error : {unsupported : true}})}],
             del : [comment.create({error : {unsupported : true}})]
           }
         });
-      var expectedParents = {
-        asana : {},
-        github : {}
-      };
 
-      sync.getParentsWithChildrenError(ops).should.eql(expectedParents);
+      sync.hasExecutionError(ops).should.eql(false);
     });
   });
 
