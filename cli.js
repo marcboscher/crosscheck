@@ -38,7 +38,8 @@ function runSync ()  {
     }
 
     if (res.rateLimitReachedUntil) {
-      console.log("API rate limit was reached. Try again on " + new Date(res.rateLimitReachedUntil));
+      console.log("API rate limit was reached. Try again after " + 
+        (new Date(res.rateLimitReachedUntil)).toLocaleTimeString());
     }
 
   })
