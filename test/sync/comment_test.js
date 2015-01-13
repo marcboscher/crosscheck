@@ -243,31 +243,119 @@ describe("sync/comment", function () {
 
   });
 
+  
+  // *******************************************************************
+  describe("getParentsWithChildrenError", function () {
+    it("includes asana item with comment create error", function () {
+      var ops = opsModule.create({
+          asana : {
+            parent : item.create({managerId : "1"}),
+            create : [comment.create({error : {text : "error"}})],
+            update : [],
+            del : []
+          }
+        });
+      var expectedParents = {
+        asana : {
+          "1" : true
+        },
+        github : {}
+      };
+
+      sync.getParentsWithChildrenError(ops).should.eql(expectedParents);
+    });
+
+    it("includes github item with comment update error", function () {
+      var ops = opsModule.create({
+          github : {
+            parent : item.create({fields : {"gh.number" : "1"}}),
+            create : [comment.create()],
+            update : [{nue : comment.create({error : {text : "error"}})}],
+            del : [comment.create()]
+          }
+        });
+      var expectedParents = {
+        asana : {},
+        github : {
+          "1" : true
+        }
+      };
+
+      sync.getParentsWithChildrenError(ops).should.eql(expectedParents);
+    });
+
+    it("excludes items without comment errors", function () {
+      var ops = opsModule.create({
+          asana : {
+            parent : item.create({managerId : "1"}),
+            create : [comment.create()],
+            update : [{nue : comment.create()}],
+            del : [comment.create()]
+          },
+          github : {
+            parent : item.create({fields : {"gh.number" : "1"}}),
+            create : [comment.create()],
+            update : [{nue : comment.create()}],
+            del : [comment.create()]
+          }
+        });
+      var expectedParents = {
+        asana : {},
+        github : {}
+      };
+
+      sync.getParentsWithChildrenError(ops).should.eql(expectedParents);
+    });
+
+    it("includes items with comment errors due to unsupported operations", function () {
+      var ops = opsModule.create({
+          asana : {
+            parent : item.create({managerId : "1"}),
+            create : [comment.create({error : {unsupported : true}})],
+            update : [{nue : comment.create({error : {unsupported : true}})}],
+            del : [comment.create({error : {unsupported : true}})]
+          },
+          github : {
+            parent : item.create({fields : {"gh.number" : "1"}}),
+            create : [comment.create({error : {unsupported : true}})],
+            update : [{nue : comment.create({error : {unsupported : true}})}],
+            del : [comment.create({error : {unsupported : true}})]
+          }
+        });
+      var expectedParents = {
+        asana : {},
+        github : {}
+      };
+
+      sync.getParentsWithChildrenError(ops).should.eql(expectedParents);
+    });
+  });
+
 
 
   // *******************************************************************
-  describe.skip("sync comments", function () {
-    it("must sync the comments of the specified items", function () {
-      var asanaItem = item.create({
-            title : "#33 hello world",
-            managerId : "18935613894395"
-          }),
-          gitHubItem = item.create({
-          title : "hello world",
-          fields : {
-            "gh.owner" : "marcboscher",
-            "gh.repo" : "cctest",
-            "gh.number" : 33
-          }
-        });
+  // describe.skip("sync comments", function () {
+  //   it("must sync the comments of the specified items", function () {
+  //     var asanaItem = item.create({
+  //           title : "#33 hello world",
+  //           managerId : "18935613894395"
+  //         }),
+  //         gitHubItem = item.create({
+  //         title : "hello world",
+  //         fields : {
+  //           "gh.owner" : "marcboscher",
+  //           "gh.repo" : "cctest",
+  //           "gh.number" : 33
+  //         }
+  //       });
 
-      return sync.getOps(asanaItem, gitHubItem)
-        .then(function (ops) {
-          console.log("\n\n####OPS#####\n%s\n\n", JSON.stringify(ops, null, 2));
+  //     return sync.getOps(asanaItem, gitHubItem)
+  //       .then(function (ops) {
+  //         console.log("\n\n####OPS#####\n%s\n\n", JSON.stringify(ops, null, 2));
 
-          return sync.execOps(ops, asanaItem, gitHubItem);
-        });
-    });
-  });
+  //         return sync.execOps(ops, asanaItem, gitHubItem);
+  //       });
+  //   });
+  // });
 
 });
