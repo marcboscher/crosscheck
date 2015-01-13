@@ -243,31 +243,96 @@ describe("sync/comment", function () {
 
   });
 
-
-
+  
   // *******************************************************************
-  describe.skip("sync comments", function () {
-    it("must sync the comments of the specified items", function () {
-      var asanaItem = item.create({
-            title : "#33 hello world",
-            managerId : "18935613894395"
-          }),
-          gitHubItem = item.create({
-          title : "hello world",
-          fields : {
-            "gh.owner" : "marcboscher",
-            "gh.repo" : "cctest",
-            "gh.number" : 33
+  describe("hasExecutionError", function () {
+    it("returns true if comment create error", function () {
+      var ops = opsModule.create({
+          asana : {
+            create : [
+              comment.create({error : {text : "error"}}),
+              comment.create()
+            ],
+            update : [],
+            del : []
           }
         });
 
-      return sync.getOps(asanaItem, gitHubItem)
-        .then(function (ops) {
-          console.log("\n\n####OPS#####\n%s\n\n", JSON.stringify(ops, null, 2));
+      sync.hasExecutionError(ops).should.eql(true);
+    });
 
-          return sync.execOps(ops, asanaItem, gitHubItem);
+    it("returns true if github comment update error", function () {
+      var ops = opsModule.create({
+          github : {
+            create : [comment.create()],
+            update : [{nue : comment.create({error : {text : "error"}})}],
+            del : [comment.create()]
+          }
         });
+
+      sync.hasExecutionError(ops).should.eql(true);
+    });
+
+    it("returns false if no comment errors", function () {
+      var ops = opsModule.create({
+          asana : {
+            create : [comment.create(), comment.create()],
+            update : [{nue : comment.create()}],
+            del : [comment.create()]
+          },
+          github : {
+            create : [comment.create()],
+            update : [{nue : comment.create()}, {nue : comment.create()}],
+            del : [comment.create()]
+          }
+        });
+
+      sync.hasExecutionError(ops).should.eql(false);
+    });
+
+    it("returns false if errors due to unsupported operations", function () {
+      var ops = opsModule.create({
+          asana : {
+            create : [comment.create({error : {unsupported : true}})],
+            update : [{nue : comment.create({error : {unsupported : true}})}],
+            del : [comment.create({error : {unsupported : true}})]
+          },
+          github : {
+            create : [comment.create({error : {unsupported : true}})],
+            update : [{nue : comment.create({error : {unsupported : true}})}],
+            del : [comment.create({error : {unsupported : true}})]
+          }
+        });
+
+      sync.hasExecutionError(ops).should.eql(false);
     });
   });
+
+
+
+  // *******************************************************************
+  // describe.skip("sync comments", function () {
+  //   it("must sync the comments of the specified items", function () {
+  //     var asanaItem = item.create({
+  //           title : "#33 hello world",
+  //           managerId : "18935613894395"
+  //         }),
+  //         gitHubItem = item.create({
+  //         title : "hello world",
+  //         fields : {
+  //           "gh.owner" : "marcboscher",
+  //           "gh.repo" : "cctest",
+  //           "gh.number" : 33
+  //         }
+  //       });
+
+  //     return sync.getOps(asanaItem, gitHubItem)
+  //       .then(function (ops) {
+  //         console.log("\n\n####OPS#####\n%s\n\n", JSON.stringify(ops, null, 2));
+
+  //         return sync.execOps(ops, asanaItem, gitHubItem);
+  //       });
+  //   });
+  // });
 
 });

@@ -12,12 +12,39 @@ function runSync ()  {
   console.log("Sync - " + new Date());
 
   crosscheck.sync()
-  .then(function (logs) {
-    _.forEach(logs, function (log) {
-      _.forEach(log.opsLog, function (opsLog) {
-        console.log(opsLog);
+  .then(function (res) {
+    
+    if (res.syncLog.length === 0) {
+      console.log("Nothing to sync!");
+    }
+    else {
+      _.forEach(res.syncLog, function (log) {
+        _.forEach(log.opsLog, function (opsLog) {
+          console.log(opsLog);
+        });
       });
-    });
+    }
+
+    if (res.errors.length > 0) {
+      _.forEach(res.errors, function (error) {
+        if (error.error && error.error.text) {
+          console.log("ERROR - " + error.error + ". CAUSE: " + error.error.text);
+        }
+        else {
+          console.log("ERROR - " + error.toString());
+        }
+        
+      });
+    }
+
+    if (res.rateLimitReachedUntil) {
+      console.log("API rate limit was reached. Try again after " + 
+        (new Date(res.rateLimitReachedUntil)).toLocaleTimeString());
+    }
+
+  })
+  .catch(function (e) {
+    console.log("Unexpected error - " + JSON.stringify(e, null, e));
   });  
 }
 
