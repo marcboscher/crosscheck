@@ -22,7 +22,7 @@ describe("asana.story.", function () {
         "text" : "this is a comment\nover multiple lines\n\n#field1 ddd\n#field2"
       },
       expectedComment = comment.create({
-        "body" : "this is a comment\nover multiple lines\n",
+        "body" : "this is a comment\nover multiple lines",
         "lastUpdated" : 1414336735240, 
         "fields" : {
           "field1" : "ddd",
@@ -119,7 +119,7 @@ describe("asana.story.", function () {
     
       return storyModule.createComment(commentToCreate, itemToCommentOn)
         .then(function (commentCreated) {
-          commentCreated.body.should.eql(commentToCreate.body + "\n\n");
+          commentCreated.body.should.eql(commentToCreate.body);
           commentCreated.fields.should.have.properties("foo", "baz", "aa.id");
           commentCreated.fields.foo.should.eql(commentToCreate.fields.foo);
           commentCreated.fields.baz.should.eql(commentToCreate.fields.baz);

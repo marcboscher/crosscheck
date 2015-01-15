@@ -29,7 +29,7 @@ describe("github.comment.", function () {
         "body": "a comment\r\n\r\nover multiple lines\r\n\r\n#field1 aaa\r\n#field2"
       },
       expectedComment = comment.create({
-        "body" : "a comment\n\nover multiple lines\n",
+        "body" : "a comment\n\nover multiple lines",
         "lastUpdated" : 1415818082000, 
         "fields" : {
           "field1" : "aaa",
@@ -140,7 +140,7 @@ describe("github.comment.", function () {
     
       return commentModule.createComment(commentToCreate, itemToCommentOn)
         .then(function (commentCreated) {
-          commentCreated.body.should.eql(commentToCreate.body + "\n\n");
+          commentCreated.body.should.eql(commentToCreate.body);
           commentCreated.fields.foo.should.eql(commentToCreate.fields.foo);
           commentCreated.fields.baz.should.eql(commentToCreate.fields.baz);
           commentCreated.fields.should.have.properties("gh.id");

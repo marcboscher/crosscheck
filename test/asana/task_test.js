@@ -48,7 +48,7 @@ describe("asana.task.", function () {
       },
       expectedItem = item.create({
         "title" : "#2 Reference issue",
-        "body" : "some **bold** text. some *italic* text\n\na list\n- foo\n- bar\n- a sublist\n  - a\n  - b\n  - c\n- baz\n\n",
+        "body" : "some **bold** text. some *italic* text\n\na list\n- foo\n- bar\n- a sublist\n  - a\n  - b\n  - c\n- baz",
         //"body" : "some **bold** text\n",
         "managerId" : "17620819608823",
         "completed" : false,
@@ -195,7 +195,7 @@ describe("asana.task.", function () {
     
       return taskModule.createItem(itemToCreate, project).then(function (itemCreated) {
         itemCreated.title.should.startWith(itemToCreate.title);
-        itemCreated.body.should.eql(itemToCreate.body);
+        itemCreated.body.should.eql(itemToCreate.body.trim());
         itemCreated.completed.should.eql(itemToCreate.completed);
       });
     });
