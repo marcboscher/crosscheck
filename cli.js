@@ -25,17 +25,15 @@ function runSync ()  {
       });
     }
 
-    if (res.errors.length > 0) {
-      _.forEach(res.errors, function (error) {
-        if (error.error && error.error.text) {
-          console.log("ERROR - " + error.error + ". CAUSE: " + error.error.text);
-        }
-        else {
-          console.log("ERROR - " + error.toString());
-        }
-        
-      });
-    }
+    _.forEach(res.errors, function (error) {
+      if (error.error && error.error.text) {
+        console.log("ERROR - " + error.error + ". CAUSE: " + error.error.text);
+      }
+      else {
+        console.log("ERROR - " + error.toString());
+      }
+      
+    });
 
     if (res.rateLimitReachedUntil) {
       console.log("API rate limit was reached. Try again after " + 
