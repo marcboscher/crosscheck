@@ -31,7 +31,7 @@ Check out [**The Big Picture**]
 - OAuth support
 
 #### How It Works
-To sync an Asana project with a GitHub repo, prefix the project name with `#cc` and specify the `#owner` and `#repo` in the project description. There's nothing to do on the GitHub side.
+To sync an Asana project with a GitHub repo, prefix the project name with `#gh` and specify the `#gh.owner` and `#gh.repo` in the project description. There's nothing to do on the GitHub side. Note the prefixes in the **image below are outdated**.
 
 ![Asana project config](asana-setup.png)
 
