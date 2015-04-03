@@ -39,9 +39,9 @@ To sync an Asana project with a GitHub repo, prefix the project name with `#gh` 
 
 ## Getting Started
 
-Setup the configuration by creating a file config/local.yml within your 
-working directory. You can also use json, properties and more.
-See [node-config](https://github.com/lorenwest/node-config/wiki/Configuration-Files)
+Setup the configuration (uses [node-config](https://github.com/lorenwest/node-config/wiki/Configuration-Files))
+by creating a file config/local.yml within your 
+working directory.
 
 ```yaml
 crosscheck:
@@ -56,7 +56,13 @@ crosscheck:
         password: YOUR-GITHUB-PSW
 
 ```
+Alternatively, you can also specify the keys using the environment variables:
 
+* `ASANA_API_KEY`
+* `GITHUB_ACCESS_TOKEN`
+* `GITHUB_USERNAME`
+* `GITHUB_PASSWORD`
+ 
 
 Install with cli command
 
