@@ -1,0 +1,12 @@
+{ "crosscheck": 
+  {
+    "asana" : {
+      "apiKey" : "ASANA_API_KEY"
+    },
+    "github" : {
+      "personalAccessToken" : "GITHUB_ACCESS_TOKEN",
+      "userName" : "GITHUB_USERNAME",
+      "password" : "GITHUB_PASSWORD"
+    }
+  }
+}
