@@ -201,23 +201,22 @@ describe("sync/comment", function () {
       sync.diff(asanaComments, gitHubComments).should.eql(expectedOperations);
     });
 
-    it("deletes comments in github if find a github comment with an asana id but no matching asana comment", function () {
+    it("adds comments in asana if find a github comment with an asana id but no matching asana comment", function () {
       var asanaComments = [],
         gitHubComments = [
           comment.create({
-            body : "delete in github because no matching asana comment",
+            body : "created in asana because there is no matching asana comment",
             fields : {"aa.id" : "1"}
           })
         ],
         expectedOperations = opsModule.create({
-          github : {
+          asana : {
             parent : null,
-            create : [],
+            create : [gitHubComments[0]],
             update : [],
-            del : [gitHubComments[0]]
+            del : []
           } 
         });
-       
       sync.diff(asanaComments, gitHubComments).should.eql(expectedOperations);
     });
 
