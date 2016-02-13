@@ -1,7 +1,8 @@
-
 > Collaborate across tools.
 
-*This project is still at an early stage and should be considered experimental.*
+
+
+*This project was replaced by a much more complete solution: http://unito.io*
 
 CrossCheck lets you use [Asana](http://asana.com) as a frontend to manage work 
 in other end systems. Currently only GitHub is supported, with some big limitations 
