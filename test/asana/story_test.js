@@ -5,9 +5,7 @@ var item = require("../../lib/item"),
   comment = require("../../lib/comment"),
   storyModule = require("../../lib/asana/story"),
   record = require('../record'),
-  _ = require("lodash"),
-  should = require("should"),
-  nock = require('nock');
+  _ = require("lodash");
 
 
 describe("asana.story.", function () {
@@ -64,10 +62,10 @@ describe("asana.story.", function () {
   describe("getStories", function () {
 
     var recorder = record('asana/story.getStories');
-    before(recorder.before);
     after(recorder.after);
 
     it("must return an array of stories whose texts are strings", function () {
+      recorder.before();
       return storyModule.getStories(18704113106162).then(function (stories) {
         // console.log(stories);
         stories.should.not.be.empty;
@@ -82,10 +80,10 @@ describe("asana.story.", function () {
   describe("getComments", function () {
 
     var recorder = record('asana/story.getComments');
-    before(recorder.before);
     after(recorder.after);
 
     it("must return an array of comments whose bodies are strings", function () {
+      recorder.before();
       return storyModule.getComments(item.create({managerId : 18704113106162})).then(function (comments) {
         // console.log(comments);
         comments.should.not.be.empty;
@@ -103,10 +101,10 @@ describe("asana.story.", function () {
   describe("createComment", function () {
 
     var recorder = record('asana/story.createComment');
-    before(recorder.before);
     after(recorder.after);
 
     it("must create the comment requested", function () {
+      recorder.before();
       var commentToCreate = comment.create(
           {
             "body" : "this is a test\n\nextra line",

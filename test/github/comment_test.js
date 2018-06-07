@@ -6,9 +6,7 @@ var item = require("../../lib/item"),
   comment = require("../../lib/comment"),
   commentModule = require("../../lib/github/comment"),
   record = require('../record'),
-  _ = require("lodash"),
-  should = require("should"),
-  nock = require('nock');
+  _ = require("lodash");
 
 
 describe("github.comment.", function () {
@@ -69,10 +67,10 @@ describe("github.comment.", function () {
   describe("getGitHubComments", function () {
 
     var recorder = record('github/comment.getGitHubComments');
-    before(recorder.before);
     after(recorder.after);
 
     it("must return an array of comments whose texts are strings", function () {
+      recorder.before();
       return commentModule.getGitHubComments(38, "marcboscher", "cctest")
         .then(function (comments) {
           // console.log(comments);
@@ -88,10 +86,10 @@ describe("github.comment.", function () {
   describe("getComments", function () {
 
     var recorder = record('github/comment.getComments');
-    before(recorder.before);
     after(recorder.after);
 
     it("must return an array of comments whose bodies are strings", function () {
+      recorder.before();
       return commentModule.getComments(item.create(
           {
             fields : {
@@ -116,10 +114,10 @@ describe("github.comment.", function () {
   describe("createComment", function () {
 
     var recorder = record('github/comment.createComment');
-    before(recorder.before);
     after(recorder.after);
 
     it("must create the comment requested", function () {
+      recorder.before();
       var commentToCreate = comment.create(
           {
             "body" : "this is a test\n\nextra line",
@@ -153,10 +151,10 @@ describe("github.comment.", function () {
   describe("updateComment", function () {
 
     var recorder = record('github/comment.updateComment');
-    before(recorder.before);
     after(recorder.after);
 
     it("must not fail", function () {
+      recorder.before();
       var newComment = comment.create({
           body : "Updated comment body " + _.random(9999) + 
             "\nLast updated on " + new Date(),
@@ -189,10 +187,10 @@ describe("github.comment.", function () {
   describe("deleteComment", function () {
 
     var recorder = record('github/comment.deleteComment');
-    before(recorder.before);
     after(recorder.after);
 
     it("must not fail", function () {
+      recorder.before();
       var commentToDelete = comment.create({
           fields : {
             "gh.id" : "62776366"

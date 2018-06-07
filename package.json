@@ -21,30 +21,31 @@
     "lib"
   ],
   "dependencies": {
-    "bluebird": "^2.3.5",
-    "config": "^1.6.0",
-    "js-yaml": "^3.2.2",
-    "li": "^1.0.0",
-    "lodash": "^2.4.1",
-    "minimist": "^1.1.0",
-    "node-localstorage": "^0.3.4",
-    "should": "^4.0.4",
-    "stampit": "^1.1.0",
+    "bluebird": "^2.11.0",
+    "config": "^1.30.0",
+    "js-yaml": "^3.12.0",
+    "li": "^1.3.0",
+    "lodash": "^4.17.5",
+    "minimist": "^1.2.0",
+    "node-localstorage": "^0.3.6",
+    "stampit": "^1.2.0",
     "string.prototype.endswith": "^0.2.0",
-    "superagent": "^0.20.0"
+    "superagent": "^3.8.3"
   },
   "devDependencies": {
-    "grunt-browserify": "^3.2.1",
-    "grunt-contrib-jshint": "^0.10.0",
-    "grunt-contrib-nodeunit": "^0.3.3",
-    "grunt-contrib-watch": "^0.6.1",
-    "grunt-jsdoc": "^0.5.7",
-    "grunt-mocha-cli": "^1.9.0",
-    "ink-docstrap": "^0.4.12",
-    "jshint-stylish": "^0.2.0",
-    "load-grunt-tasks": "^0.4.0",
-    "nock": "^0.48.2",
-    "time-grunt": "^0.3.1"
+    "grunt": "^1.0.3",
+    "grunt-browserify": "^5.3.0",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-nodeunit": "^2.0.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-jsdoc": "^2.2.1",
+    "grunt-mocha-cli": "^4.0.0",
+    "ink-docstrap": "^1.3.2",
+    "jshint-stylish": "^2.2.1",
+    "load-grunt-tasks": "^4.0.0",
+    "nock": "^9.3.2",
+    "should": "^13.2.1",
+    "time-grunt": "^1.4.0"
   },
   "scripts": {
     "test": "grunt"

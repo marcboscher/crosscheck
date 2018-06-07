@@ -2,11 +2,8 @@
 /*jshint expr: true*/
 "use strict";
 var projectModule = require("../../lib/asana/project"),
-  conf = require("../../lib/conf"),
   record = require('../record'),
   _ = require("lodash"),
-  should = require("should"),
-  nock = require('nock'),
   PROJECT_PREFIX = "#gh";
 
 
@@ -15,10 +12,10 @@ describe("asana.project.", function () {
   describe("getProjects", function () {
     
     var recorder = record('asana/project.getProjects');
-    before(recorder.before);
     after(recorder.after);
 
     it("must return an array of projects whose names have the right prefix", function () {
+      recorder.before();
       return projectModule.getProjects({id : 17620819608777, name : "crosscheck.io"}, PROJECT_PREFIX)
       .then(function (projects) {
         //console.log(projects);
