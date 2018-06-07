@@ -2,11 +2,8 @@
 /*jshint expr: true*/
 "use strict";
 var workspaceModule = require("../../lib/asana/workspace"),
-  conf = require("../../lib/conf"),
   record = require('../record'),
-  _ = require("lodash"),
-  should = require("should"),
-  nock = require('nock');
+  _ = require("lodash");
 
 
 describe("asana.workspace.", function () {
@@ -14,10 +11,10 @@ describe("asana.workspace.", function () {
   describe("getWorkspaces", function () {
     
     var recorder = record('asana/workspace.getWorkspaces');
-    before(recorder.before);
     after(recorder.after);
 
     it("must return an array of workspaces", function () {
+      recorder.before();
       return workspaceModule.getWorkspaces().then(function (workspaces) {
         //console.log(workspaces);
         workspaces.forEach(function (workspace) {

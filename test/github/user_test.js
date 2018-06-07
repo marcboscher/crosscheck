@@ -12,10 +12,10 @@ describe("github.user", function () {
   describe("getAuthenticatedUser", function () {
 
   	var recorder = record('github/user.getAuthenticatedUser');
-    before(recorder.before);
     after(recorder.after);
 
     it("returns a user", function () {
+        recorder.before();
     	return userModule.getAuthenticatedUser()
     	.then(function (user) {
     		user.name.should.eql("Marc Boscher");

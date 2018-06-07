@@ -2,12 +2,9 @@
 /*jshint expr: true*/
 "use strict";
 var item = require("../../lib/item"),
-  comment = require("../../lib/comment"),
   taskModule = require("../../lib/asana/task"),
   record = require('../record'),
-  _ = require("lodash"),
-  should = require("should"),
-  nock = require('nock');
+  _ = require("lodash");
 
 
 describe("asana.task.", function () {
@@ -114,10 +111,10 @@ describe("asana.task.", function () {
   describe("getTasks", function () {
 
     var recorder = record('asana/task.getTasks');
-    before(recorder.before);
     after(recorder.after);
 
     it("must return an array of tasks whose names are strings", function () {
+      recorder.before();
       return taskModule.getTasks({"id": "17620819608778"}).then(function (tasks) {
         //console.log(tasks);
         tasks.should.not.be.empty;
@@ -133,10 +130,10 @@ describe("asana.task.", function () {
   describe("getItems", function () {
 
     var recorder = record('asana/task.getItems');
-    before(recorder.before);
     after(recorder.after);
 
     it("must return an array of items", function () {
+      recorder.before();
       return taskModule.getItems({"id": "17620819608778"}).then(function (items) {
         //console.log(items);
         items.forEach(function (items) {
@@ -151,10 +148,10 @@ describe("asana.task.", function () {
   describe("updateItem", function () {
 
     var recorder = record('asana/task.updateItem');
-    before(recorder.before);
     after(recorder.after);
 
     it("must not fail", function () {
+      recorder.before();
       var newItem = item.create(
         {
           "title": "Update test " + new Date(), 
@@ -173,10 +170,10 @@ describe("asana.task.", function () {
   describe("createItem", function () {
 
     var recorder = record('asana/task.createItem');
-    before(recorder.before);
     after(recorder.after);
 
     it("must create the item requested", function () {
+      recorder.before();
       var itemToCreate = item.create(
         {
           "title" : "create test",

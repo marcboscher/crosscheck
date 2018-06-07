@@ -1,6 +1,7 @@
 var nock = require('nock');
 var path = require('path');
 var fs = require('fs');
+var assert = require('assert');
 
 module.exports = function (name, options) {
   // options tell us where to store our fixtures
@@ -43,7 +44,7 @@ module.exports = function (name, options) {
         //nock.restore();
         fs.writeFile(fp, text, done);
       } else {
-        //nock.restore();
+        //nock.done();
         done();
       }
     }

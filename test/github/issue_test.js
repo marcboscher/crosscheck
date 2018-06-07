@@ -5,7 +5,6 @@ var conf = require("../../lib/conf"),
   item = require("../../lib/item"),
   issueModule = require("../../lib/github/issue"),
   record = require('../record'),
-  should = require("should"),
   _ = require("lodash");
 
 describe("github.issue", function () {
@@ -118,10 +117,10 @@ describe("github.issue", function () {
   describe("getIssues_singlePage", function () {
     
     var recorder = record('github/issue.getIssues_singlePage');
-    before(recorder.before);
     after(recorder.after);
 
     it("must return a single page of results when there are lest than 100 results (repo marcboscher/cctest)", function () {
+      recorder.before();
       return issueModule.getIssues(
           {
             "gh.owner": "marcboscher", 
@@ -146,10 +145,10 @@ describe("github.issue", function () {
   describe("getIssues_multiPage", function () {
 
     var recorder = record('github/issue.getIssues_multiPage');
-    before(recorder.before);
     after(recorder.after);
 
     it("must return all result pages (unique issues only) when there are more than 100 results (repo play/play)", function () {
+      recorder.before();
       return issueModule.getIssues(
           {
             "gh.owner": "play", 
@@ -159,7 +158,7 @@ describe("github.issue", function () {
         .then(function (issues) {
           //console.log(issues);
           issues.length.should.be.greaterThan(100);
-          issues.length.should.be.eql(_.unique(issues, "number").length);
+          issues.length.should.be.eql(_.uniqBy(issues, "number").length);
           issues.forEach(function (issue) {
             issue.title.should.be.a.String;
           });
@@ -170,10 +169,10 @@ describe("github.issue", function () {
   describe("getItems", function () {
     
     var recorder = record('github/issue.getItems');
-    before(recorder.before);
     after(recorder.after);
 
     it("must return an array of items", function () {
+      recorder.before();
       return issueModule.getItems({"gh.owner": "marcboscher", "gh.repo": "cctest"}).then(function (items) {
         //console.log(items);
         items.forEach(function (items) {
@@ -187,10 +186,10 @@ describe("github.issue", function () {
   describe("updateItem", function () {
 
     var recorder = record('github/issue.updateItem');
-    before(recorder.before);
     after(recorder.after);
 
     it("must not fail", function () {
+      recorder.before();
       var newItem = item.create(
         {
           "title": "Update test " + new Date(), 
@@ -223,11 +222,12 @@ describe("github.issue", function () {
   describe("createItem", function () {
 
     var recorder = record('github/issue.createItem');
-    before(recorder.before);
     after(recorder.after);
 
+
     it("must not fail", function () {
-      var itemToCreate = item.create(
+        recorder.before();
+        var itemToCreate = item.create(
         {
           "title" : "create test",
           "body" : "this is a test\n\nextra line",
@@ -240,7 +240,7 @@ describe("github.issue", function () {
             "gh.repo" : "cctest"
           }
         });
-    
+
       return issueModule.createItem(itemToCreate).then(function (itemCreated) {
         itemCreated.title.should.eql("#" + itemCreated.fields["gh.number"] + " " + itemToCreate.title);
         itemCreated.body.should.eql(itemToCreate.body);
@@ -250,12 +250,12 @@ describe("github.issue", function () {
   });
   
   describe("createItem in completed state", function () {
-    
-    var recorder = record('github/issue.createItem_completed');
-    before(recorder.before);
+
+    var recorder = record('github/issue.xcreateCompletedItem');
     after(recorder.after);
 
     it("must create a completed item", function () {
+      recorder.before();
       var itemToCreate = item.create(
         {
           "title" : "create test in complete state",
@@ -266,7 +266,7 @@ describe("github.issue", function () {
             "gh.repo" : "cctest"
           }
         });
-    
+
       return issueModule.createItem(itemToCreate).then(function (itemCreated) {
         itemCreated.title.should.eql(conf.get("github.issueNumberPrefix") + itemCreated.fields["gh.number"] + " " + itemToCreate.title);
         itemCreated.completed.should.eql(itemToCreate.completed);
